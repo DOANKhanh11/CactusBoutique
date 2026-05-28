@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pot index{% endblock %}
+
+{% block body %}
+    <h1>Pot index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Material</th>
+                <th>Couleur</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pot in pots %}
+            <tr>
+                <td>{{ pot.id }}</td>
+                <td>{{ pot.name }}</td>
+                <td>{{ pot.material }}</td>
+                <td>{{ pot.couleur }}</td>
+                <td>{{ pot.prix }}</td>
+                <td>
+                    <a href="{{ path('app_pot_show', {'id': pot.id}) }}">show</a>
+                    <a href="{{ path('app_pot_edit', {'id': pot.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_pot_new') }}">Create new</a>
+{% endblock %}

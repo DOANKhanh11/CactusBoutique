@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cactus index{% endblock %}
+
+{% block body %}
+    <h1>Cactus index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>NiveauSoin</th>
+                <th>Arrosage</th>
+                <th>Taille</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cactu in cacti %}
+            <tr>
+                <td>{{ cactu.id }}</td>
+                <td>{{ cactu.name }}</td>
+                <td>{{ cactu.description }}</td>
+                <td>{{ cactu.prix }}</td>
+                <td>{{ cactu.niveauSoin }}</td>
+                <td>{{ cactu.arrosage }}</td>
+                <td>{{ cactu.taille }}</td>
+                <td>
+                    <a href="{{ path('app_cactus_show', {'id': cactu.id}) }}">show</a>
+                    <a href="{{ path('app_cactus_edit', {'id': cactu.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cactus_new') }}">Create new</a>
+{% endblock %}
