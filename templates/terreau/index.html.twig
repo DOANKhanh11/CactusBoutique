@@ -1,39 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Terreau index{% endblock %}
+{% block title %}Terreau{% endblock %}
 
 {% block body %}
-    <h1>Terreau index</h1>
+    <div class="section-header">
+        <h1>🌱 Terreau</h1>
+        <a href="{{ path('app_terreau_new') }}" class="btn btn-primary">+ Nouveau</a>
+    </div>
 
-    <table class="table">
+    <table class="data-table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
+                <th>#</th>
+                <th>Nom</th>
                 <th>Composition</th>
                 <th>Prix</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for terreau in terreaus %}
             <tr>
-                <td>{{ terreau.id }}</td>
-                <td>{{ terreau.name }}</td>
-                <td>{{ terreau.composition }}</td>
-                <td>{{ terreau.prix }}</td>
+                <td style="color: #ccc; font-size: 0.8rem">{{ terreau.id }}</td>
+                <td><strong>{{ terreau.name }}</strong></td>
+                <td style="color: #7a7a6e">{{ terreau.composition }}</td>
+                <td><span class="badge badge-green">{{ terreau.prix }} €</span></td>
                 <td>
-                    <a href="{{ path('app_terreau_show', {'id': terreau.id}) }}">show</a>
-                    <a href="{{ path('app_terreau_edit', {'id': terreau.id}) }}">edit</a>
+                    <div class="action-btns">
+                        <a href="{{ path('app_terreau_show', {'id': terreau.id}) }}" class="action-link">voir</a>
+                        <a href="{{ path('app_terreau_edit', {'id': terreau.id}) }}" class="action-link">modifier</a>
+                    </div>
                 </td>
             </tr>
         {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
+            <tr class="empty-row">
+                <td colspan="5">Aucun substrat enregistré.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_terreau_new') }}">Create new</a>
 {% endblock %}
