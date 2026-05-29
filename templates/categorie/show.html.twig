@@ -3,32 +3,32 @@
 {% block title %}Categorie{% endblock %}
 
 {% block body %}
-    <h1>Categorie</h1>
+    <div class="section-header">
+        <h1>📂 Catégories</h1>
+    </div>
 
-    <table class="table">
+    <table class="data-table">
+           <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Environnement</th>
+            </tr>
+        </thead>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ categorie.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ categorie.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ categorie.description }}</td>
-            </tr>
-            <tr>
-                <th>Environnement</th>
-                <td>{{ categorie.environnement }}</td>
+                <td style="color: #ccc; font-size: 0.8rem">{{ categorie.id }}</td>
+                <td><strong>{{ categorie.name }}</strong></td>
+                <td style="color: #7a7a6e">{{ categorie.description }}</td>
+                <td><span class="badge badge-sand">{{ categorie.environnement }}</span></td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_categorie_index') }}">back to list</a>
+    <a href="{{ path('app_categorie_index') }}" class="btn btn-secondary">Back to list</a>
 
-    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">edit</a>
+    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-primary">Edit</a>
 
     {{ include('categorie/_delete_form.html.twig') }}
 {% endblock %}
