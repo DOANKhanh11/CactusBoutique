@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Terreau{% endblock %}
+{% block title %}Modifier Terreau{% endblock %}
 
 {% block body %}
-    <h1>Edit Terreau</h1>
+    <div class="section-header">
+        <h1>🌱 Modifier Terreau</h1>
+    </div>
 
     {{ include('terreau/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_terreau_index') }}">back to list</a>
+    <a href="{{ path('app_terreau_index') }}" class="btn btn-secondary">Back to list</a>
 
     {{ include('terreau/_delete_form.html.twig') }}
 {% endblock %}
