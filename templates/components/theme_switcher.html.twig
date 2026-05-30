@@ -1,0 +1,35 @@
+<div class="theme-switcher" id="theme-switcher">
+    <button id="theme-light" class="active" title="Light mode" onclick="toggleTheme('light')">
+        ☀️
+    </button>
+    <button id="theme-dark" title="Dark mode" onclick="toggleTheme('dark')">
+        🌙
+    </button>
+</div>
+
+<script>
+    // Update switcher button states based on current theme
+    function updateThemeSwitcher() {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const lightBtn = document.getElementById('theme-light');
+        const darkBtn = document.getElementById('theme-dark');
+        
+        if (lightBtn && darkBtn) {
+            lightBtn.classList.toggle('active', currentTheme === 'light');
+            darkBtn.classList.toggle('active', currentTheme === 'dark');
+        }
+    }
+
+    // Update on page load
+    updateThemeSwitcher();
+
+    // Watch for theme changes
+    const observer = new MutationObserver(() => {
+        updateThemeSwitcher();
+    });
+
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+    });
+</script>

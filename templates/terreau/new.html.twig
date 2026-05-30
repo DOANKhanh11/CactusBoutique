@@ -3,9 +3,11 @@
 {% block title %}New Terreau{% endblock %}
 
 {% block body %}
-    <h1>Create new Terreau</h1>
+     <div class="section-header">
+        <h1>🌱 Nouveau Terreau</h1>
+    </div>
 
     {{ include('terreau/_form.html.twig') }}
 
-    <a href="{{ path('app_terreau_index') }}">back to list</a>
+    <a href="{{ path('app_terreau_index') }}" class="btn btn-secondary">Back to list</a>
 {% endblock %}

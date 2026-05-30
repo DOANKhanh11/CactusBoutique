@@ -1,4 +1,5 @@
 <nav class="main-menu">
+    <a href="{{ path('app_home') }}" class="brand">🌵 Cactus Boutique</a>
     <ul>
         <li><a href="{{ path('app_home') }}">Accueil</a></li>
         <li><a href="{{ path('app_cactus_index') }}">Cactus</a></li>
@@ -6,4 +7,13 @@
         <li><a href="{{ path('app_categorie_index') }}">Catégorie</a></li>
         <li><a href="{{ path('app_terreau_index') }}">Terreau</a></li>
     </ul>
+    <ul style="display: flex; gap: 0.5rem; align-items: center;">
+        {% if app.user %}
+            <li><a href="{{ path('app_preferences') }}">⚙️ Préférences</a></li>
+        {% endif %}
+        <li>
+            {{ include('components/theme_switcher.html.twig') }}
+        </li>
+    </ul>
 </nav>
+
