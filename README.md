@@ -26,6 +26,11 @@ symfony server:start
 
 ➡️ **Guide complet d'installation** : voir [GUIDE_INSTALLATION.md](GUIDE_INSTALLATION.md)
 ➡️ **Guide de test des fonctionnalités** : voir [GUIDE_TEST.md](GUIDE_TEST.md)
+➡️ **Guide de déploiement (Alwaysdata)** : voir [GUIDE_DEPLOIEMENT.md](GUIDE_DEPLOIEMENT.md)
+
+## 🔗 Application en ligne
+
+`https://<votre-compte>.alwaysdata.net` *(à compléter après déploiement)*
 
 ## Comptes de démonstration
 
