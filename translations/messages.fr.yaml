@@ -27,10 +27,14 @@ auth:
 
 # Home
 home:
-    title: La boutique des passionnés de cactus
-    subtitle: Achetez, vendez et partagez votre passion pour les plantes succulentes
-    btn_browse: Voir les annonces
-    btn_sell: Publier une annonce
+    welcome: Bienvenue sur
+    tagline: "Une sélection soigneusement cultivée de cactus, pots et terreau — pour transformer votre intérieur en oasis verdoyante."
+    btn_discover: Découvrir les cactus →
+    btn_categories: Voir les catégories
+    card_cactus_desc: Notre collection
+    card_pot_desc: Céramique & terre cuite
+    card_categorie_desc: Parcourir par famille
+    card_terreau_desc: Substrats spécialisés
 
 # Cactus
 cactus:

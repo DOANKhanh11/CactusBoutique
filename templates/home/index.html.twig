@@ -1,42 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}{{ 'nav.home'|trans }}{% endblock %}
 
 {% block body %}
     <section class="hero">
         <div class="hero-content">
             <span class="hero-emoji">🌵</span>
-            <h1>Bienvenue sur <span class="accent">Cactus Boutique</span></h1>
+            <h1>{{ 'home.welcome'|trans }} <span class="accent">Cactus Boutique</span></h1>
             <p class="tagline">
-                Une sélection soigneusement cultivée de cactus, pots et terreau —
-                pour transformer votre intérieur en oasis verdoyante.
+                {{ 'home.tagline'|trans }}
             </p>
 
             <div class="cta-group">
-                <a href="{{ path('app_cactus_index') }}" class="btn btn-primary">Découvrir les cactus →</a>
-                <a href="{{ path('app_categorie_index') }}" class="btn btn-secondary">Voir les catégories</a>
+                <a href="{{ path('app_cactus_index') }}" class="btn btn-primary">{{ 'home.btn_discover'|trans }}</a>
+                <a href="{{ path('app_categorie_index') }}" class="btn btn-secondary">{{ 'home.btn_categories'|trans }}</a>
             </div>
 
             <div class="feature-grid">
                 <a href="{{ path('app_cactus_index') }}" class="feature-card">
                     <span class="feature-icon">🌵</span>
-                    <h3>Cactus</h3>
-                    <p>Notre collection</p>
+                    <h3>{{ 'nav.cactus'|trans }}</h3>
+                    <p>{{ 'home.card_cactus_desc'|trans }}</p>
                 </a>
                 <a href="{{ path('app_pot_index') }}" class="feature-card">
                     <span class="feature-icon">🪴</span>
-                    <h3>Pots</h3>
-                    <p>Céramique & terre cuite</p>
+                    <h3>{{ 'nav.pot'|trans }}</h3>
+                    <p>{{ 'home.card_pot_desc'|trans }}</p>
                 </a>
                 <a href="{{ path('app_categorie_index') }}" class="feature-card">
                     <span class="feature-icon">📂</span>
-                    <h3>Catégories</h3>
-                    <p>Parcourir par famille</p>
+                    <h3>{{ 'nav.categorie'|trans }}</h3>
+                    <p>{{ 'home.card_categorie_desc'|trans }}</p>
                 </a>
                 <a href="{{ path('app_terreau_index') }}" class="feature-card">
                     <span class="feature-icon">🌱</span>
-                    <h3>Terreau</h3>
-                    <p>Substrats spécialisés</p>
+                    <h3>{{ 'nav.terreau'|trans }}</h3>
+                    <p>{{ 'home.card_terreau_desc'|trans }}</p>
                 </a>
             </div>
         </div>

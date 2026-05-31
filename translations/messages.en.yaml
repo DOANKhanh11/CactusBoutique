@@ -27,10 +27,14 @@ auth:
 
 # Home
 home:
-    title: The cactus lovers shop
-    subtitle: Buy, sell and share your passion for succulents
-    btn_browse: Browse listings
-    btn_sell: Post a listing
+    welcome: Welcome to
+    tagline: "A carefully curated selection of cacti, pots and soil — to turn your home into a green oasis."
+    btn_discover: Discover the cacti →
+    btn_categories: View categories
+    card_cactus_desc: Our collection
+    card_pot_desc: Ceramic & terracotta
+    card_categorie_desc: Browse by family
+    card_terreau_desc: Specialised substrates
 
 # Cactus
 cactus:
