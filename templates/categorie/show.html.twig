@@ -1,34 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categorie{% endblock %}
+{% block title %}{{ categorie.name }}{% endblock %}
 
 {% block body %}
-    <div class="section-header">
-        <h1>📂 Catégories</h1>
-    </div>
+<div class="section-header">
+    <h1>📁 {{ categorie.name }}</h1>
+    <a href="{{ path('app_categorie_index') }}" class="btn btn-secondary">← Retour</a>
+</div>
 
-    <table class="data-table">
-           <thead>
-            <tr>
-                <th>#</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Environnement</th>
-            </tr>
-        </thead>
+<div style="max-width:540px;background:var(--bg-secondary);border-radius:14px;padding:2rem;box-shadow:0 1px 3px var(--shadow-light);">
+    <table class="data-table" style="margin-bottom:1.5rem;">
         <tbody>
-            <tr>
-                <td style="color: #ccc; font-size: 0.8rem">{{ categorie.id }}</td>
-                <td><strong>{{ categorie.name }}</strong></td>
-                <td style="color: #7a7a6e">{{ categorie.description }}</td>
-                <td><span class="badge badge-sand">{{ categorie.environnement }}</span></td>
-            </tr>
+            <tr><td><strong>Description</strong></td><td>{{ categorie.description }}</td></tr>
+            <tr><td><strong>Environnement</strong></td><td><span class="badge badge-sand">{{ categorie.environnement }}</span></td></tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_categorie_index') }}" class="btn btn-secondary">Back to list</a>
-
-    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-primary">Edit</a>
-
-    {{ include('categorie/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="action-btns">
+        <a href="{{ path('app_categorie_edit', {id: categorie.id}) }}" class="btn btn-primary">✏️ Modifier</a>
+        {{ include('categorie/_delete_form.html.twig') }}
+    </div>
+    {% endif %}
+</div>
 {% endblock %}

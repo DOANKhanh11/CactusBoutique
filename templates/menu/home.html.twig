@@ -9,6 +9,9 @@
     </ul>
     <ul style="display: flex; gap: 0.5rem; align-items: center;">
         {% if app.user %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{ path('admin_dashboard') }}">🛡️ Admin</a></li>
+            {% endif %}
             <li><a href="{{ path('app_profile') }}">👤 {{ app.user.pseudo }}</a></li>
             <li><a href="{{ path('app_preferences') }}">⚙️ Préférences</a></li>
             <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>

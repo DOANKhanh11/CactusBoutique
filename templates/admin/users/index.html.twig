@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateurs — Admin{% endblock %}
+
+{% block body %}
+<div class="section-header">
+    <h1>👥 Gestion des utilisateurs</h1>
+    <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">← Tableau de bord</a>
+</div>
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div style="padding:10px 16px;border-radius:8px;margin-bottom:1rem;background:{% if label=='success' %}#e6f4e6{% else %}#fdecea{% endif %};color:{% if label=='success' %}#2a6b2a{% else %}#8b2e2e{% endif %};">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Pseudo</th>
+            <th>Nom</th>
+            <th>Rôles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td><strong>{{ user.pseudo }}</strong></td>
+            <td>{{ user.prenom }} {{ user.nom }}</td>
+            <td>
+                {% for role in user.roles %}
+                    <span class="badge {% if role == 'ROLE_ADMIN' %}badge-sand{% else %}badge-green{% endif %}">
+                        {{ role }}
+                    </span>
+                {% endfor %}
+            </td>
+            <td>
+                <div class="action-btns">
+                    <a href="{{ path('admin_user_role', {id: user.id}) }}" class="action-link">Modifier rôles</a>
+                    {% if user != app.user %}
+                    <form method="post" action="{{ path('admin_user_delete', {id: user.id}) }}" onsubmit="return confirm('Supprimer cet utilisateur ?')">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete_user_' ~ user.id) }}">
+                        <button type="submit" class="action-link danger" style="background:none;border:none;cursor:pointer;">Supprimer</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+        {% else %}
+        <tr class="empty-row"><td colspan="5">Aucun utilisateur trouvé.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

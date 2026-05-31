@@ -1,38 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pot{% endblock %}
+{% block title %}{{ pot.name }}{% endblock %}
 
 {% block body %}
-    <h1>Pot</h1>
+<div class="section-header">
+    <h1>🪴 {{ pot.name }}</h1>
+    <a href="{{ path('app_pot_index') }}" class="btn btn-secondary">← Retour</a>
+</div>
 
-    <table class="table">
+<div style="max-width:540px;background:var(--bg-secondary);border-radius:14px;padding:2rem;box-shadow:0 1px 3px var(--shadow-light);">
+    <table class="data-table" style="margin-bottom:1.5rem;">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ pot.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ pot.name }}</td>
-            </tr>
-            <tr>
-                <th>Material</th>
-                <td>{{ pot.material }}</td>
-            </tr>
-            <tr>
-                <th>Couleur</th>
-                <td>{{ pot.couleur }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ pot.prix }}</td>
-            </tr>
+            <tr><td><strong>Matériau</strong></td><td>{{ pot.material }}</td></tr>
+            <tr><td><strong>Couleur</strong></td><td>{{ pot.couleur }}</td></tr>
+            <tr><td><strong>Prix</strong></td><td><span class="badge badge-green">{{ pot.prix }} €</span></td></tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_pot_index') }}">back to list</a>
-
-    <a href="{{ path('app_pot_edit', {'id': pot.id}) }}">edit</a>
-
-    {{ include('pot/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="action-btns">
+        <a href="{{ path('app_pot_edit', {id: pot.id}) }}" class="btn btn-primary">✏️ Modifier</a>
+        {{ include('pot/_delete_form.html.twig') }}
+    </div>
+    {% endif %}
+</div>
 {% endblock %}

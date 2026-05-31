@@ -1,64 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Cactus{% endblock %}
+{% block title %}{{ cactu.name }}{% endblock %}
 
 {% block body %}
-    <h1>Cactus</h1>
+<div class="section-header">
+    <h1>🌵 {{ cactu.name }}</h1>
+    <a href="{{ path('app_cactus_index') }}" class="btn btn-secondary">← Retour</a>
+</div>
 
-    <table class="table">
+<div style="max-width:640px;background:var(--bg-secondary);border-radius:14px;padding:2rem;box-shadow:0 1px 3px var(--shadow-light);">
+    <div style="font-size:1.8rem;font-weight:700;color:var(--link-color);margin-bottom:1rem;">
+        {{ cactu.prix|number_format(2, ',', ' ') }} €
+    </div>
+
+    <p style="color:var(--text-secondary);margin-bottom:1.5rem;">{{ cactu.description }}</p>
+
+    <table class="data-table" style="margin-bottom:1.5rem;">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ cactu.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ cactu.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ cactu.description }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ cactu.prix }}</td>
-            </tr>
-            <tr>
-                <th>NiveauSoin</th>
-                <td>{{ cactu.niveauSoin }}</td>
-            </tr>
-            <tr>
-                <th>Arrosage</th>
-                <td>{{ cactu.arrosage }}</td>
-            </tr>
-            <tr>
-                <th>Taille</th>
-                <td>{{ cactu.taille }}</td>
-            </tr>
-            <tr>
-                <th>Vendeur</th>
-                <td>{{ cactu.vendeur ? cactu.vendeur.pseudo : 'N/A' }}</td>
-            </tr>
-            <tr>
-                <th>Date expiration</th>
-                <td>{{ cactu.dateExpiration ? cactu.dateExpiration|date('Y-m-d H:i') : 'Aucune' }}</td>
-            </tr>
+            <tr><td><strong>Catégorie</strong></td><td>{{ cactu.categorie ? cactu.categorie.name : '—' }}</td></tr>
+            <tr><td><strong>Niveau de soin</strong></td><td>{{ cactu.niveauSoin }}</td></tr>
+            <tr><td><strong>Arrosage</strong></td><td>{{ cactu.arrosage }}</td></tr>
+            <tr><td><strong>Taille</strong></td><td>{{ cactu.taille }} cm</td></tr>
+            <tr><td><strong>Vendeur</strong></td><td>{{ cactu.vendeur ? cactu.vendeur.pseudo : '—' }}</td></tr>
+            <tr><td><strong>Expiration</strong></td><td>{{ cactu.dateExpiration ? cactu.dateExpiration|date('d/m/Y') : 'Aucune' }}</td></tr>
         </tbody>
     </table>
 
     <div class="action-btns">
-        <a href="{{ path('app_cactus_index') }}" class="action-link">back to list</a>
-        <a href="{{ path('app_cactus_edit', {'id': cactu.id}) }}" class="action-link">edit</a>
-
         {% if app.user %}
-            <form action="{{ path('app_cactus_favorite', {'id': cactu.id}) }}" method="post" style="display:inline">
+            <form action="{{ path('app_cactus_favorite', {id: cactu.id}) }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token('favorite' ~ cactu.id) }}">
                 <button type="submit" class="btn btn-secondary">
-                    {{ cactu in app.user.favorites ? 'Retirer des favoris' : 'Ajouter aux favoris' }}
+                    {{ cactu in app.user.favorites ? '💔 Retirer des favoris' : '❤️ Ajouter aux favoris' }}
                 </button>
             </form>
         {% endif %}
-    </div>
 
-    {{ include('cactus/_delete_form.html.twig') }}
+        {% if app.user and (app.user == cactu.vendeur or is_granted('ROLE_ADMIN')) %}
+            <a href="{{ path('app_cactus_edit', {id: cactu.id}) }}" class="btn btn-secondary">✏️ Modifier</a>
+            {{ include('cactus/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

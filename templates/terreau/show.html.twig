@@ -1,34 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Terreau{% endblock %}
+{% block title %}{{ terreau.name }}{% endblock %}
 
 {% block body %}
-    <div class="section-header">
-        <h1>🌱 Terreau</h1>
-    </div>
+<div class="section-header">
+    <h1>🌱 {{ terreau.name }}</h1>
+    <a href="{{ path('app_terreau_index') }}" class="btn btn-secondary">← Retour</a>
+</div>
 
-    <table class="data-table">
-      <thead>
-            <tr>
-                <th>#</th>
-                <th>Nom</th>
-                <th>Composition</th>
-                <th>Prix</th>
-            </tr>
-        </thead>
+<div style="max-width:540px;background:var(--bg-secondary);border-radius:14px;padding:2rem;box-shadow:0 1px 3px var(--shadow-light);">
+    <table class="data-table" style="margin-bottom:1.5rem;">
         <tbody>
-             <tr>
-                <td style="color: #ccc; font-size: 0.8rem">{{ terreau.id }}</td>
-                <td><strong>{{ terreau.name }}</strong></td>
-                <td style="color: #7a7a6e">{{ terreau.composition }}</td>
-                <td><span class="badge badge-green">{{ terreau.prix }} €</span></td>
-            </tr>
+            <tr><td><strong>Composition</strong></td><td>{{ terreau.composition }}</td></tr>
+            <tr><td><strong>Prix</strong></td><td><span class="badge badge-green">{{ terreau.prix }} €</span></td></tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_terreau_index') }}" class="btn btn-secondary">Back to list</a>
-
-    <a href="{{ path('app_terreau_edit', {'id': terreau.id}) }}" class="btn btn-primary">Edit</a>
-
-    {{ include('terreau/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="action-btns">
+        <a href="{{ path('app_terreau_edit', {id: terreau.id}) }}" class="btn btn-primary">✏️ Modifier</a>
+        {{ include('terreau/_delete_form.html.twig') }}
+    </div>
+    {% endif %}
+</div>
 {% endblock %}

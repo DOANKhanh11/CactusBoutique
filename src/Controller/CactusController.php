@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cactus;
+use App\Form\CactusSearchType;
 use App\Form\CactusType;
 use App\Repository\CactusRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,10 +17,18 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 final class CactusController extends AbstractController
 {
     #[Route(name: 'app_cactus_index', methods: ['GET'])]
-    public function index(CactusRepository $cactusRepository): Response
+    public function index(Request $request, CactusRepository $cactusRepository): Response
     {
+        $form = $this->createForm(CactusSearchType::class);
+        $form->handleRequest($request);
+
+        $criteria = $form->isSubmitted() && $form->isValid()
+            ? $form->getData()
+            : [];
+
         return $this->render('cactus/index.html.twig', [
-            'cacti' => $cactusRepository->findAll(),
+            'cacti' => $cactusRepository->search($criteria),
+            'searchForm' => $form,
         ]);
     }
 
@@ -87,15 +96,14 @@ final class CactusController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function edit(Request $request, Cactus $cactu, EntityManagerInterface $entityManager): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        if ($this->getUser() !== $cactu->getVendeur() && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Vous ne pouvez modifier que vos propres annonces.');
+        }
 
         $form = $this->createForm(CactusType::class, $cactu);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($this->getUser() !== $cactu->getVendeur()) {
-                throw $this->createAccessDeniedException('You can only edit your own listings.');
-            }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_cactus_index', [], Response::HTTP_SEE_OTHER);
@@ -111,10 +119,8 @@ final class CactusController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function delete(Request $request, Cactus $cactu, EntityManagerInterface $entityManager): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-
-        if ($this->getUser() !== $cactu->getVendeur()) {
-            throw $this->createAccessDeniedException('You can only delete your own listings.');
+        if ($this->getUser() !== $cactu->getVendeur() && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Vous ne pouvez supprimer que vos propres annonces.');
         }
 
         if ($this->isCsrfTokenValid('delete'.$cactu->getId(), $request->getPayload()->getString('_token'))) {

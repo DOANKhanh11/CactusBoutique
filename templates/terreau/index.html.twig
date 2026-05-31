@@ -5,7 +5,9 @@
 {% block body %}
     <div class="section-header">
         <h1>🌱 Terreau</h1>
-        <a href="{{ path('app_terreau_new') }}" class="btn btn-primary">+ Nouveau</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_terreau_new') }}" class="btn btn-primary">+ Nouveau</a>
+        {% endif %}
     </div>
 
     <table class="data-table">
@@ -28,7 +30,9 @@
                 <td>
                     <div class="action-btns">
                         <a href="{{ path('app_terreau_show', {'id': terreau.id}) }}" class="action-link">Voir</a>
-                        <a href="{{ path('app_terreau_edit', {'id': terreau.id}) }}" class="action-link">Modifier</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('app_terreau_edit', {'id': terreau.id}) }}" class="action-link">Modifier</a>
+                        {% endif %}
                     </div>
                 </td>
             </tr>

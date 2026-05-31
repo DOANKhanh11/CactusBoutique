@@ -15,6 +15,14 @@
         <p><strong>Nom :</strong> {{ user.nom }} {{ user.prenom }}</p>
         <p><strong>Pseudo :</strong> {{ user.pseudo }}</p>
         <p><strong>Rôles :</strong> {{ user.roles|join(', ') }}</p>
+
+        <form method="post" action="{{ path('app_profile_delete') }}"
+              onsubmit="return confirm('Supprimer définitivement votre compte ? Cette action est irréversible.')">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete_account') }}">
+            <button type="submit" class="btn" style="background:#b85c5c;color:#fff;margin-top:0.5rem;">
+                🗑️ Supprimer mon compte
+            </button>
+        </form>
     </section>
 
     <section style="margin-bottom: 2rem;">
