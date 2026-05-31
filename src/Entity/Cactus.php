@@ -39,7 +39,7 @@ class Cactus
     private ?Categorie $categorie = null;
 
     #[ORM\ManyToOne(inversedBy: 'cactusVendus')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $vendeur = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favorites')]
