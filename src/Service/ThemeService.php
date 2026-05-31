@@ -67,7 +67,7 @@ class ThemeService
         }
 
         $preference->setTheme($theme);
-        $preference->setUpdatedAt(new \DateTimeImmutable());
+        $preference->setUpdatedAt(new \DateTime());
         $this->preferenceRepository->save($preference, true);
     }
 
@@ -121,7 +121,7 @@ class ThemeService
         }
 
         $preference->setLanguage($language);
-        $preference->setUpdatedAt(new \DateTimeImmutable());
+        $preference->setUpdatedAt(new \DateTime());
         $this->preferenceRepository->save($preference, true);
     }
 }

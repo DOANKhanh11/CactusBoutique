@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -18,6 +19,14 @@ class Comment
 
     #[ORM\Column]
     private ?\DateTime $dateCree = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $auteur = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $cible = null;
 
     public function getId(): ?int
     {
@@ -44,6 +53,30 @@ class Comment
     public function setDateCree(\DateTime $dateCree): static
     {
         $this->dateCree = $dateCree;
+
+        return $this;
+    }
+
+    public function getAuteur(): ?User
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(User $auteur): static
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    public function getCible(): ?User
+    {
+        return $this->cible;
+    }
+
+    public function setCible(User $cible): static
+    {
+        $this->cible = $cible;
 
         return $this;
     }

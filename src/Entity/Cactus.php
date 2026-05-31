@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CactusRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
 
 #[ORM\Entity(repositoryClass: CactusRepository::class)]
 class Cactus
@@ -34,6 +35,13 @@ class Cactus
     #[ORM\ManyToOne(inversedBy: 'cactus')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
+
+    #[ORM\ManyToOne(inversedBy: 'cactusVendus')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $vendeur = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $dateExpiration = null;
 
     public function getId(): ?int
     {
@@ -120,6 +128,30 @@ class Cactus
     public function setCategorie(?Categorie $categorie): static
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getVendeur(): ?User
+    {
+        return $this->vendeur;
+    }
+
+    public function setVendeur(?User $vendeur): static
+    {
+        $this->vendeur = $vendeur;
+
+        return $this;
+    }
+
+    public function getDateExpiration(): ?\DateTime 
+    {
+        return $this->dateExpiration;
+    }
+
+    public function setDateExpiration(?\DateTime $dateExpiration): static
+    {
+        $this->dateExpiration = $dateExpiration;
 
         return $this;
     }

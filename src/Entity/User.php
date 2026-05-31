@@ -44,9 +44,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Commande::class, mappedBy: 'acheteur')]
     private Collection $commande;
 
+    /**
+     * @var Collection<int, Cactus>
+     */
+    #[ORM\OneToMany(targetEntity: \App\Entity\Cactus::class, mappedBy: 'vendeur')]
+    private Collection $cactusVendus;
+
     public function __construct()
     {
         $this->commande = new ArrayCollection();
+        $this->cactusVendus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -157,6 +164,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($commande->getAcheteur() === $this) {
                 $commande->setAcheteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, \App\Entity\Cactus>
+     */
+    public function getCactusVendus(): Collection
+    {
+        return $this->cactusVendus;
+    }
+
+    public function addCactusVendu(\App\Entity\Cactus $cactus): static
+    {
+        if (!$this->cactusVendus->contains($cactus)) {
+            $this->cactusVendus->add($cactus);
+            $cactus->setVendeur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCactusVendu(\App\Entity\Cactus $cactus): static
+    {
+        if ($this->cactusVendus->removeElement($cactus)) {
+            if ($cactus->getVendeur() === $this) {
+                $cactus->setVendeur(null);
             }
         }
 
