@@ -22,7 +22,7 @@ class CommentRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->leftJoin('c.auteur', 'a')
             ->addSelect('a')
-            ->where('c.cible = :seller')
+            ->where('c.vendeur = :seller')
             ->setParameter('seller', $seller)
             ->orderBy('c.dateCree', 'DESC')
             ->getQuery()

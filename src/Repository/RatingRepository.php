@@ -19,19 +19,19 @@ class RatingRepository extends ServiceEntityRepository
 
     public function findBySeller(User $seller): array
     {
-        return $this->findBy(['target' => $seller], ['createdAt' => 'DESC']);
+        return $this->findBy(['vendeur' => $seller], ['createdAt' => 'DESC']);
     }
 
     public function findOneByRaterAndSeller(User $rater, User $seller): ?Rating
     {
-        return $this->findOneBy(['rater' => $rater, 'target' => $seller]);
+        return $this->findOneBy(['rater' => $rater, 'vendeur' => $seller]);
     }
 
     public function getAverageScore(User $seller): float
     {
         $result = $this->createQueryBuilder('r')
             ->select('AVG(r.score) as avg')
-            ->where('r.target = :seller')
+            ->where('r.vendeur = :seller')
             ->setParameter('seller', $seller)
             ->getQuery()
             ->getSingleScalarResult();

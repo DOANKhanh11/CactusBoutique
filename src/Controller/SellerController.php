@@ -36,7 +36,7 @@ class SellerController extends AbstractController
 
             if ($commentForm->isSubmitted() && $commentForm->isValid()) {
                 $comment->setAuteur($this->getUser());
-                $comment->setCible($seller);
+                $comment->setVendeur($seller);
                 $comment->setDateCree(new \DateTime());
                 $em->persist($comment);
                 $em->flush();
@@ -57,7 +57,7 @@ class SellerController extends AbstractController
             if ($score >= 1 && $score <= 5) {
                 $rating = $ratingRepo->findOneByRaterAndSeller($this->getUser(), $seller) ?? new Rating();
                 $rating->setRater($this->getUser());
-                $rating->setTarget($seller);
+                $rating->setVendeur($seller);
                 $rating->setScore($score);
                 if (!$rating->getCreatedAt()) {
                     $rating->setCreatedAt(new \DateTime());
