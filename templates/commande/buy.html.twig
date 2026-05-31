@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commander — {{ cactus.name }}{% endblock %}
+
+{% block body %}
+<div class="section-header">
+    <h1>🛒 Commander</h1>
+    <a href="{{ path('app_cactus_show', {id: cactus.id}) }}" class="btn btn-secondary">← Retour</a>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;max-width:800px;">
+
+    <div style="background:var(--bg-secondary);border-radius:14px;padding:1.5rem;box-shadow:0 1px 3px var(--shadow-light);">
+        <h2 style="margin:0 0 1rem;font-size:1rem;color:var(--heading-color);">🌵 Résumé de la commande</h2>
+        <p><strong>{{ cactus.name }}</strong></p>
+        <p style="color:var(--text-secondary);font-size:0.875rem;">{{ cactus.description|slice(0,100) }}{% if cactus.description|length > 100 %}…{% endif %}</p>
+        <hr style="border:none;border-top:1px solid var(--border-color);margin:1rem 0;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="color:var(--text-secondary);">Prix unitaire</span>
+            <strong>{{ cactus.prix|number_format(2, ',', ' ') }} €</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem;">
+            <span style="color:var(--text-secondary);">Quantité</span>
+            <strong>1</strong>
+        </div>
+        <hr style="border:none;border-top:1px solid var(--border-color);margin:1rem 0;">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:1.2rem;font-weight:700;">
+            <span>Total</span>
+            <span style="color:var(--link-color);">{{ cactus.prix|number_format(2, ',', ' ') }} €</span>
+        </div>
+        {% if cactus.vendeur %}
+        <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:1rem;">
+            Vendu par <a href="{{ path('app_seller_show', {id: cactus.vendeur.id}) }}" class="action-link">{{ cactus.vendeur.pseudo }}</a>
+        </p>
+        {% endif %}
+    </div>
+
+    <div style="background:var(--bg-secondary);border-radius:14px;padding:1.5rem;box-shadow:0 1px 3px var(--shadow-light);">
+        <h2 style="margin:0 0 1rem;font-size:1rem;color:var(--heading-color);">📦 Livraison</h2>
+        {{ form_start(form) }}
+            <div style="margin-bottom:1rem;">
+                {{ form_label(form.adresse, null, {label_attr: {style: 'display:block;font-size:0.8rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;'}}) }}
+                {{ form_widget(form.adresse, {attr: {style: 'width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);font-size:0.875rem;resize:vertical;'}}) }}
+                {% if form_errors(form.adresse) %}
+                    <p style="color:#b85c5c;font-size:0.8rem;margin:4px 0 0;">{{ form_errors(form.adresse) }}</p>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;">
+                ✅ Confirmer la commande
+            </button>
+        {{ form_end(form) }}
+    </div>
+
+</div>
+{% endblock %}

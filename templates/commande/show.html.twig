@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande #{{ commande.id }}{% endblock %}
+
+{% block body %}
+<div class="section-header">
+    <h1>📦 Commande #{{ commande.id }}</h1>
+    <a href="{{ path('app_commande_index') }}" class="btn btn-secondary">← Mes commandes</a>
+</div>
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div style="padding:10px 16px;border-radius:8px;margin-bottom:1rem;background:{% if label=='success' %}#e6f4e6{% else %}#fdecea{% endif %};color:{% if label=='success' %}#2a6b2a{% else %}#8b2e2e{% endif %};">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<div style="max-width:600px;background:var(--bg-secondary);border-radius:14px;padding:2rem;box-shadow:0 1px 3px var(--shadow-light);">
+    <div style="display:flex;justify-content:space-between;margin-bottom:1.5rem;">
+        <div>
+            <p style="margin:0;font-size:0.8rem;color:var(--text-secondary);">Date</p>
+            <strong>{{ commande.dateCree ? commande.dateCree|date('d/m/Y à H:i') : '—' }}</strong>
+        </div>
+        <div>
+            <p style="margin:0;font-size:0.8rem;color:var(--text-secondary);">Statut</p>
+            <span class="badge badge-green">{{ commande.status }}</span>
+        </div>
+        <div>
+            <p style="margin:0;font-size:0.8rem;color:var(--text-secondary);">Total</p>
+            <strong style="color:var(--link-color);">{{ commande.prixTotal|number_format(2, ',', ' ') }} €</strong>
+        </div>
+    </div>
+
+    <table class="data-table" style="margin-bottom:1.5rem;">
+        <thead>
+            <tr>
+                <th>Article</th>
+                <th>Qté</th>
+                <th>Prix unitaire</th>
+                <th>Sous-total</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ligne in commande.contenuCommandes %}
+            <tr>
+                <td>
+                    {% if ligne.cactus %}
+                        <a href="{{ path('app_cactus_show', {id: ligne.cactus.id}) }}" class="action-link">{{ ligne.cactus.name }}</a>
+                    {% else %}
+                        Article supprimé
+                    {% endif %}
+                </td>
+                <td>{{ ligne.quantite }}</td>
+                <td>{{ ligne.prixUnitaire|number_format(2, ',', ' ') }} €</td>
+                <td>{{ (ligne.quantite * ligne.prixUnitaire)|number_format(2, ',', ' ') }} €</td>
+            </tr>
+        {% else %}
+            <tr class="empty-row"><td colspan="4">Aucun article.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <p style="font-size:0.875rem;color:var(--text-secondary);">
+        📍 <strong>Adresse de livraison :</strong> {{ commande.adresse }}
+    </p>
+</div>
+{% endblock %}

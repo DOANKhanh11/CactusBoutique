@@ -27,7 +27,10 @@
     </table>
 
     <div class="action-btns">
-        {% if app.user %}
+        {% if is_granted('ROLE_USER') %}
+            {% if app.user != cactu.vendeur %}
+                <a href="{{ path('app_commande_buy', {id: cactu.id}) }}" class="btn btn-primary">🛒 Acheter</a>
+            {% endif %}
             <form action="{{ path('app_cactus_favorite', {id: cactu.id}) }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token('favorite' ~ cactu.id) }}">
                 <button type="submit" class="btn btn-secondary">

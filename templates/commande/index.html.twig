@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes{% endblock %}
+
+{% block body %}
+<div class="section-header">
+    <h1>📦 Mes commandes</h1>
+    <a href="{{ path('app_cactus_index') }}" class="btn btn-secondary">← Catalogue</a>
+</div>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Statut</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for commande in commandes %}
+        <tr>
+            <td style="color:var(--text-secondary);font-size:0.8rem;">{{ commande.id }}</td>
+            <td>{{ commande.dateCree ? commande.dateCree|date('d/m/Y') : '—' }}</td>
+            <td><span class="badge badge-green">{{ commande.status }}</span></td>
+            <td><strong>{{ commande.prixTotal|number_format(2, ',', ' ') }} €</strong></td>
+            <td>
+                <a href="{{ path('app_commande_show', {id: commande.id}) }}" class="action-link">Voir</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr class="empty-row"><td colspan="5">Aucune commande pour le moment.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

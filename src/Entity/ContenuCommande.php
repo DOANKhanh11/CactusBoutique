@@ -22,44 +22,21 @@ class ContenuCommande
     #[ORM\ManyToOne(inversedBy: 'contenuCommandes')]
     private ?Commande $commande = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Cactus $cactus = null;
 
-    public function getQuantite(): ?int
-    {
-        return $this->quantite;
-    }
+    public function getId(): ?int { return $this->id; }
 
-    public function setQuantite(int $quantite): static
-    {
-        $this->quantite = $quantite;
+    public function getQuantite(): ?int { return $this->quantite; }
+    public function setQuantite(int $quantite): static { $this->quantite = $quantite; return $this; }
 
-        return $this;
-    }
+    public function getPrixUnitaire(): ?float { return $this->prixUnitaire; }
+    public function setPrixUnitaire(float $prixUnitaire): static { $this->prixUnitaire = $prixUnitaire; return $this; }
 
-    public function getPrixUnitaire(): ?float
-    {
-        return $this->prixUnitaire;
-    }
+    public function getCommande(): ?Commande { return $this->commande; }
+    public function setCommande(?Commande $commande): static { $this->commande = $commande; return $this; }
 
-    public function setPrixUnitaire(float $prixUnitaire): static
-    {
-        $this->prixUnitaire = $prixUnitaire;
-
-        return $this;
-    }
-
-    public function getCommande(): ?Commande
-    {
-        return $this->commande;
-    }
-
-    public function setCommande(?Commande $commande): static
-    {
-        $this->commande = $commande;
-
-        return $this;
-    }
+    public function getCactus(): ?Cactus { return $this->cactus; }
+    public function setCactus(?Cactus $cactus): static { $this->cactus = $cactus; return $this; }
 }
