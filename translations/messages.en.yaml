@@ -1,0 +1,162 @@
+# Navigation
+nav:
+    home: Home
+    cactus: Cactus
+    pot: Pots
+    categorie: Categories
+    terreau: Substrate
+    profile: My profile
+    preferences: Preferences
+    admin: Administration
+    login: Login
+    register: Register
+    logout: Log out
+
+# Auth
+auth:
+    login_title: Login
+    register_title: Create an account
+    pseudo: Username
+    password: Password
+    nom: Last name
+    prenom: First name
+    submit_login: Log in
+    submit_register: Register
+    no_account: No account yet?
+    already_account: Already have an account?
+
+# Home
+home:
+    title: The cactus lovers shop
+    subtitle: Buy, sell and share your passion for succulents
+    btn_browse: Browse listings
+    btn_sell: Post a listing
+
+# Cactus
+cactus:
+    title: Cactus catalogue
+    new: Post a listing
+    search: Advanced search
+    results: result found
+    results_plural: results found
+    no_results: No cactus matches your search.
+    reset: Reset
+    name: Name
+    description: Description
+    price: Price
+    care: Care level
+    watering: Watering
+    size: Size
+    category: Category
+    seller: Seller
+    expiry: Expiry
+    no_expiry: None
+    add_favorite: Add to favourites
+    remove_favorite: Remove from favourites
+    edit: Edit
+    delete: Delete
+    back: Back
+    easy: Easy
+    medium: Medium
+    hard: Difficult
+
+# Search
+search:
+    name: Name
+    category: Category
+    all_categories: All
+    care_level: Care level
+    all_levels: All
+    price_min: Min price (€)
+    price_max: Max price (€)
+    expiry_before: Expires before
+    sort: Sort by
+    sort_default: Relevance
+    sort_price_asc: Price ascending
+    sort_price_desc: Price descending
+    sort_newest: Newest
+    sort_expiry: Expiring soon
+    submit: Search
+
+# Profile
+profile:
+    title: My space
+    welcome: Welcome,
+    nom: Last name
+    pseudo: Username
+    roles: Roles
+    favorites: Favourites
+    orders: My orders
+    listings: My listings
+    no_favorites: No listings in favourites yet.
+    no_orders: You have not placed any order yet.
+    no_listings: You have not posted any listing yet.
+    delete_account: Delete my account
+    delete_confirm: Permanently delete your account? This action cannot be undone.
+
+# Seller
+seller:
+    title: Seller
+    rating: Rating
+    no_ratings: No ratings
+    based_on: Based on
+    note: rating
+    notes: ratings
+    your_rating: Your rating
+    save_rating: Save
+    comment_title: Leave a comment
+    comment_publish: Publish
+    comments: Comments
+    no_comments: No comments yet.
+    delete_comment: Delete
+    delete_comment_confirm: Delete this comment?
+    login_to_rate: Log in to rate this seller.
+    login_to_comment: Log in to leave a comment.
+    self_rating_error: You cannot rate yourself.
+
+# Admin
+admin:
+    title: Administration
+    users: Users
+    total_users: registered accounts
+    edit_roles: Edit roles
+    delete_user: Delete
+    delete_confirm: Delete this user?
+    roles_updated: Roles updated for
+    user_deleted: User deleted.
+    back: Dashboard
+
+# Preferences
+preferences:
+    title: My Preferences
+    theme: Theme
+    theme_desc: Choose your preferred theme
+    light: Light mode
+    dark: Dark mode
+    current_theme: Current theme
+    language: Language
+    language_desc: Select your preferred language
+    current_language: Current language
+
+# Flash messages
+flash:
+    comment_published: Comment published.
+    rating_saved: Rating saved.
+    comment_deleted: Comment deleted.
+    theme_changed: Theme changed.
+    language_changed_fr: Langue changée en Français.
+    language_changed_en: Language changed to English.
+
+# Common
+common:
+    back: Back
+    save: Save
+    cancel: Cancel
+    edit: Edit
+    delete: Delete
+    confirm_delete: Are you sure?
+    yes: Yes
+    no: No
+    actions: Actions
+    see: View
+    new: New

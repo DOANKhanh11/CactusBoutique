@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon compte{% endblock %}
+{% block title %}{{ 'profile.title'|trans }}{% endblock %}
 
 {% block body %}
     <section class="section-header">
         <div>
-            <h1>Mon espace</h1>
-            <p>Bienvenue, {{ user.pseudo }}.</p>
+            <h1>{{ 'profile.title'|trans }}</h1>
+            <p>{{ 'profile.welcome'|trans }} {{ user.pseudo }}.</p>
         </div>
     </section>
 
     <section class="card" style="margin-bottom: 2rem; padding: 1.5rem; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 18px;">
-        <h2>Profil utilisateur</h2>
-        <p><strong>Nom :</strong> {{ user.nom }} {{ user.prenom }}</p>
-        <p><strong>Pseudo :</strong> {{ user.pseudo }}</p>
-        <p><strong>Rôles :</strong> {{ user.roles|join(', ') }}</p>
+        <h2>{{ 'auth.pseudo'|trans }}</h2>
+        <p><strong>{{ 'auth.nom'|trans }} :</strong> {{ user.nom }} {{ user.prenom }}</p>
+        <p><strong>{{ 'profile.pseudo'|trans }} :</strong> {{ user.pseudo }}</p>
+        <p><strong>{{ 'profile.roles'|trans }} :</strong> {{ user.roles|join(', ') }}</p>
 
         <form method="post" action="{{ path('app_profile_delete') }}"
               onsubmit="return confirm('Supprimer définitivement votre compte ? Cette action est irréversible.')">

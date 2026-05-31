@@ -1,0 +1,162 @@
+# Navigation
+nav:
+    home: Accueil
+    cactus: Cactus
+    pot: Pots
+    categorie: Catégories
+    terreau: Terreaux
+    profile: Mon profil
+    preferences: Préférences
+    admin: Administration
+    login: Connexion
+    register: Inscription
+    logout: Se déconnecter
+
+# Auth
+auth:
+    login_title: Connexion
+    register_title: Créer un compte
+    pseudo: Pseudo
+    password: Mot de passe
+    nom: Nom
+    prenom: Prénom
+    submit_login: Se connecter
+    submit_register: S'inscrire
+    no_account: Pas encore de compte ?
+    already_account: Déjà un compte ?
+
+# Home
+home:
+    title: La boutique des passionnés de cactus
+    subtitle: Achetez, vendez et partagez votre passion pour les plantes succulentes
+    btn_browse: Voir les annonces
+    btn_sell: Publier une annonce
+
+# Cactus
+cactus:
+    title: Catalogue de cactus
+    new: Publier une annonce
+    search: Recherche avancée
+    results: résultat trouvé
+    results_plural: résultats trouvés
+    no_results: Aucun cactus ne correspond à votre recherche.
+    reset: Réinitialiser
+    name: Nom
+    description: Description
+    price: Prix
+    care: Niveau de soin
+    watering: Arrosage
+    size: Taille
+    category: Catégorie
+    seller: Vendeur
+    expiry: Expiration
+    no_expiry: Aucune
+    add_favorite: Ajouter aux favoris
+    remove_favorite: Retirer des favoris
+    edit: Modifier
+    delete: Supprimer
+    back: Retour
+    easy: Facile
+    medium: Moyen
+    hard: Difficile
+
+# Search
+search:
+    name: Nom
+    category: Catégorie
+    all_categories: Toutes
+    care_level: Niveau de soin
+    all_levels: Tous
+    price_min: Prix min (€)
+    price_max: Prix max (€)
+    expiry_before: Expire avant le
+    sort: Trier par
+    sort_default: Pertinence
+    sort_price_asc: Prix croissant
+    sort_price_desc: Prix décroissant
+    sort_newest: Plus récent
+    sort_expiry: Expiration proche
+    submit: Rechercher
+
+# Profile
+profile:
+    title: Mon espace
+    welcome: Bienvenue,
+    nom: Nom
+    pseudo: Pseudo
+    roles: Rôles
+    favorites: Favoris
+    orders: Mes commandes
+    listings: Mes annonces
+    no_favorites: Aucune annonce en favoris pour le moment.
+    no_orders: Vous n'avez pas encore passé de commande.
+    no_listings: Vous n'avez pas encore publié d'annonce.
+    delete_account: Supprimer mon compte
+    delete_confirm: Supprimer définitivement votre compte ? Cette action est irréversible.
+
+# Seller
+seller:
+    title: Vendeur
+    rating: Notation
+    no_ratings: Aucune note
+    based_on: Basé sur
+    note: note
+    notes: notes
+    your_rating: Votre note
+    save_rating: Enregistrer
+    comment_title: Laisser un commentaire
+    comment_publish: Publier
+    comments: Commentaires
+    no_comments: Aucun commentaire pour le moment.
+    delete_comment: Supprimer
+    delete_comment_confirm: Supprimer ce commentaire ?
+    login_to_rate: Connectez-vous pour noter ce vendeur.
+    login_to_comment: Connectez-vous pour laisser un commentaire.
+    self_rating_error: Vous ne pouvez pas vous noter vous-même.
+
+# Admin
+admin:
+    title: Administration
+    users: Utilisateurs
+    total_users: comptes enregistrés
+    edit_roles: Modifier rôles
+    delete_user: Supprimer
+    delete_confirm: Supprimer cet utilisateur ?
+    roles_updated: Rôles mis à jour pour
+    user_deleted: Utilisateur supprimé.
+    back: Tableau de bord
+
+# Preferences
+preferences:
+    title: Mes Préférences
+    theme: Thème
+    theme_desc: Choisissez votre thème préféré
+    light: Mode Clair
+    dark: Mode Sombre
+    current_theme: Thème actuel
+    language: Langue
+    language_desc: Sélectionnez votre langue préférée
+    current_language: Langue actuelle
+
+# Flash messages
+flash:
+    comment_published: Commentaire publié.
+    rating_saved: Note enregistrée.
+    comment_deleted: Commentaire supprimé.
+    theme_changed: Thème modifié.
+    language_changed_fr: Langue changée en Français.
+    language_changed_en: Language changed to English.
+
+# Common
+common:
+    back: Retour
+    save: Enregistrer
+    cancel: Annuler
+    edit: Modifier
+    delete: Supprimer
+    confirm_delete: Êtes-vous sûr ?
+    yes: Oui
+    no: Non
+    actions: Actions
+    see: Voir
+    new: Nouveau
