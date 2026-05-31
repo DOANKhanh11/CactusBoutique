@@ -17,22 +17,22 @@ class RatingRepository extends ServiceEntityRepository
         parent::__construct($registry, Rating::class);
     }
 
-    public function findByVendeur(User $vendeur): array
+    public function findBySeller(User $seller): array
     {
-        return $this->findBy(['vendeur' => $vendeur], ['createdAt' => 'DESC']);
+        return $this->findBy(['target' => $seller], ['createdAt' => 'DESC']);
     }
 
-    public function findOneByRaterAndVendeur(User $rater, User $vendeur): ?Rating
+    public function findOneByRaterAndSeller(User $rater, User $seller): ?Rating
     {
-        return $this->findOneBy(['rater' => $rater, 'vendeur' => $vendeur]);
+        return $this->findOneBy(['rater' => $rater, 'target' => $seller]);
     }
 
-    public function getAverageScore(User $vendeur): float
+    public function getAverageScore(User $seller): float
     {
         $result = $this->createQueryBuilder('r')
             ->select('AVG(r.score) as avg')
-            ->where('r.vendeur = :vendeur')
-            ->setParameter('vendeur', $vendeur)
+            ->where('r.target = :seller')
+            ->setParameter('seller', $seller)
             ->getQuery()
             ->getSingleScalarResult();
 
