@@ -36,7 +36,7 @@
             </form>
         {% endif %}
 
-        {% if app.user and (app.user == cactu.vendeur or is_granted('ROLE_ADMIN')) %}
+        {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('app_cactus_edit', {id: cactu.id}) }}" class="btn btn-secondary">✏️ Modifier</a>
             {{ include('cactus/_delete_form.html.twig') }}
         {% endif %}

@@ -119,7 +119,7 @@
 {% block body %}
 <div class="section-header">
     <h1>🌵 Catalogue de cactus</h1>
-    {% if is_granted('ROLE_USER') %}
+    {% if is_granted('ROLE_ADMIN') %}
         <a href="{{ path('app_cactus_new') }}" class="btn btn-primary">+ Publier une annonce</a>
     {% endif %}
 </div>
@@ -197,7 +197,7 @@
             {% endif %}
             <div class="card-footer">
                 <a href="{{ path('app_cactus_show', {id: cactu.id}) }}" class="btn btn-primary" style="flex:1;justify-content:center;">Voir</a>
-                {% if is_granted('ROLE_USER') and app.user == cactu.vendeur %}
+                {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_cactus_edit', {id: cactu.id}) }}" class="btn btn-secondary">Modifier</a>
                 {% endif %}
             </div>

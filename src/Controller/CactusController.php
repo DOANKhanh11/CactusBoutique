@@ -33,10 +33,9 @@ final class CactusController extends AbstractController
     }
 
     #[Route('/new', name: 'app_cactus_new', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
 
         $cactu = new Cactus();
         $form = $this->createForm(CactusType::class, $cactu);
@@ -93,12 +92,9 @@ final class CactusController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_cactus_edit', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, Cactus $cactu, EntityManagerInterface $entityManager): Response
     {
-        if ($this->getUser() !== $cactu->getVendeur() && !$this->isGranted('ROLE_ADMIN')) {
-            throw $this->createAccessDeniedException('Vous ne pouvez modifier que vos propres annonces.');
-        }
 
         $form = $this->createForm(CactusType::class, $cactu);
         $form->handleRequest($request);
@@ -116,13 +112,9 @@ final class CactusController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_cactus_delete', methods: ['POST'])]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, Cactus $cactu, EntityManagerInterface $entityManager): Response
     {
-        if ($this->getUser() !== $cactu->getVendeur() && !$this->isGranted('ROLE_ADMIN')) {
-            throw $this->createAccessDeniedException('Vous ne pouvez supprimer que vos propres annonces.');
-        }
-
         if ($this->isCsrfTokenValid('delete'.$cactu->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($cactu);
             $entityManager->flush();
