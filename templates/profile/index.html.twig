@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+    <section class="section-header">
+        <div>
+            <h1>Mon espace</h1>
+            <p>Bienvenue, {{ user.pseudo }}.</p>
+        </div>
+    </section>
+
+    <section class="card" style="margin-bottom: 2rem; padding: 1.5rem; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 18px;">
+        <h2>Profil utilisateur</h2>
+        <p><strong>Nom :</strong> {{ user.nom }} {{ user.prenom }}</p>
+        <p><strong>Pseudo :</strong> {{ user.pseudo }}</p>
+        <p><strong>Rôles :</strong> {{ user.roles|join(', ') }}</p>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+        <div class="section-header">
+            <h2>Favoris</h2>
+            <a href="{{ path('app_cactus_index') }}" class="btn btn-secondary">Voir les annonces</a>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Annonce</th>
+                    <th>Catégorie</th>
+                    <th>Prix</th>
+                    <th>Vendeur</th>
+                    <th>Expiration</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cactu in favorites %}
+                    <tr>
+                        <td>{{ cactu.name }}</td>
+                        <td>{{ cactu.categorie.name }}</td>
+                        <td>{{ cactu.prix }} €</td>
+                        <td>{{ cactu.vendeur.pseudo }}</td>
+                        <td>{{ cactu.dateExpiration ? cactu.dateExpiration|date('Y-m-d') : 'Aucune' }}</td>
+                        <td><a href="{{ path('app_cactus_show', {'id': cactu.id}) }}" class="action-link">Voir</a></td>
+                    </tr>
+                {% else %}
+                    <tr class="empty-row"><td colspan="6">Aucune annonce en favoris pour le moment.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <section style="margin-bottom: 2rem;">
+        <div class="section-header">
+            <h2>Mes commandes</h2>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Référence</th>
+                    <th>Date</th>
+                    <th>Statut</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for commande in orders %}
+                    <tr>
+                        <td>{{ commande.id }}</td>
+                        <td>{{ commande.dateCree ? commande.dateCree|date('Y-m-d') : 'N/A' }}</td>
+                        <td>{{ commande.status }}</td>
+                        <td>{{ commande.prixTotal }} €</td>
+                    </tr>
+                {% else %}
+                    <tr class="empty-row"><td colspan="4">Vous n'avez pas encore passé de commande.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <h2>Mes annonces</h2>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Annonce</th>
+                    <th>Prix</th>
+                    <th>Catégorie</th>
+                    <th>Statut</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cactu in annonces %}
+                    <tr>
+                        <td>{{ cactu.name }}</td>
+                        <td>{{ cactu.prix }} €</td>
+                        <td>{{ cactu.categorie.name }}</td>
+                        <td>{{ cactu.dateExpiration and cactu.dateExpiration > "now" ? 'Active' : 'Expirée' }}</td>
+                        <td><a href="{{ path('app_cactus_show', {'id': cactu.id}) }}" class="action-link">Voir</a></td>
+                    </tr>
+                {% else %}
+                    <tr class="empty-row"><td colspan="5">Vous n'avez pas encore publié d'annonce.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

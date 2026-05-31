@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/cactus')]
 final class CactusController extends AbstractController
@@ -23,13 +24,17 @@ final class CactusController extends AbstractController
     }
 
     #[Route('/new', name: 'app_cactus_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $cactu = new Cactus();
         $form = $this->createForm(CactusType::class, $cactu);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $cactu->setVendeur($this->getUser());
             $entityManager->persist($cactu);
             $entityManager->flush();
 
@@ -50,13 +55,47 @@ final class CactusController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/favorite', name: 'app_cactus_favorite', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    public function favorite(Request $request, Cactus $cactu, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        $token = $request->request->get('_token');
+        if (!$this->isCsrfTokenValid('favorite'.$cactu->getId(), $token)) {
+            return $this->redirectToRoute('app_cactus_show', ['id' => $cactu->getId()]);
+        }
+
+        $user = $this->getUser();
+        if (!$user instanceof \App\Entity\User) {
+            throw $this->createAccessDeniedException();
+        }
+
+        if ($user->getFavorites()->contains($cactu)) {
+            $user->removeFavorite($cactu);
+        } else {
+            $user->addFavorite($cactu);
+        }
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_cactus_show', ['id' => $cactu->getId()]);
+    }
+
     #[Route('/{id}/edit', name: 'app_cactus_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function edit(Request $request, Cactus $cactu, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $form = $this->createForm(CactusType::class, $cactu);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($this->getUser() !== $cactu->getVendeur()) {
+                throw $this->createAccessDeniedException('You can only edit your own listings.');
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_cactus_index', [], Response::HTTP_SEE_OTHER);
@@ -69,8 +108,15 @@ final class CactusController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_cactus_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function delete(Request $request, Cactus $cactu, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        if ($this->getUser() !== $cactu->getVendeur()) {
+            throw $this->createAccessDeniedException('You can only delete your own listings.');
+        }
+
         if ($this->isCsrfTokenValid('delete'.$cactu->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($cactu);
             $entityManager->flush();

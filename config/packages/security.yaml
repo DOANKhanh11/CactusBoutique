@@ -16,6 +16,16 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                username_parameter: pseudo
+                password_parameter: password
+                default_target_path: app_home
+                always_use_default_target_path: false
+            logout:
+                path: app_logout
+                target: app_home
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -26,8 +36,14 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/preferences, roles: ROLE_USER }
+        - { path: ^/cactus/new, roles: ROLE_USER }
+        - { path: ^/cactus/.*/edit, roles: ROLE_USER }
+        - { path: ^/cactus/.*/favorite, roles: ROLE_USER }
+        - { path: ^/cactus/.*/buy, roles: ROLE_USER }
+        - { path: ^/seller/.*/review, roles: ROLE_USER }
 
 when@test:
     security:

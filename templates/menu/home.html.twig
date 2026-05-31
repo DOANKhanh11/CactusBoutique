@@ -9,7 +9,12 @@
     </ul>
     <ul style="display: flex; gap: 0.5rem; align-items: center;">
         {% if app.user %}
+            <li><a href="{{ path('app_profile') }}">👤 {{ app.user.pseudo }}</a></li>
             <li><a href="{{ path('app_preferences') }}">⚙️ Préférences</a></li>
+            <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+        {% else %}
+            <li><a href="{{ path('app_login') }}">Connexion</a></li>
+            <li><a href="{{ path('app_register') }}">Inscription</a></li>
         {% endif %}
         <li>
             {{ include('components/theme_switcher.html.twig') }}

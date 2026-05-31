@@ -50,10 +50,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: \App\Entity\Cactus::class, mappedBy: 'vendeur')]
     private Collection $cactusVendus;
 
+    /**
+     * @var Collection<int, Cactus>
+     */
+    #[ORM\ManyToMany(targetEntity: \App\Entity\Cactus::class, inversedBy: 'favoritedBy')]
+    #[ORM\JoinTable(name: 'user_favorite_cactus')]
+    private Collection $favorites;
+
     public function __construct()
     {
         $this->commande = new ArrayCollection();
         $this->cactusVendus = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -194,6 +202,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             if ($cactus->getVendeur() === $this) {
                 $cactus->setVendeur(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, \App\Entity\Cactus>
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
+    public function addFavorite(\App\Entity\Cactus $cactus): static
+    {
+        if (!$this->favorites->contains($cactus)) {
+            $this->favorites->add($cactus);
+            $cactus->addFavoritedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(\App\Entity\Cactus $cactus): static
+    {
+        if ($this->favorites->removeElement($cactus)) {
+            $cactus->removeFavoritedBy($this);
         }
 
         return $this;

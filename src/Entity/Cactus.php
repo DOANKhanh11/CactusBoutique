@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CactusRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
 
@@ -40,8 +42,16 @@ class Cactus
     #[ORM\JoinColumn(nullable: false)]
     private ?User $vendeur = null;
 
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favorites')]
+    private Collection $favoritedBy;
+
     #[ORM\Column(nullable: true)]
     private ?\DateTime $dateExpiration = null;
+
+    public function __construct()
+    {
+        $this->favoritedBy = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -140,6 +150,30 @@ class Cactus
     public function setVendeur(?User $vendeur): static
     {
         $this->vendeur = $vendeur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getFavoritedBy(): Collection
+    {
+        return $this->favoritedBy;
+    }
+
+    public function addFavoritedBy(User $user): static
+    {
+        if (!$this->favoritedBy->contains($user)) {
+            $this->favoritedBy->add($user);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoritedBy(User $user): static
+    {
+        $this->favoritedBy->removeElement($user);
 
         return $this;
     }
