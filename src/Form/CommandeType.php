@@ -14,7 +14,7 @@ class CommandeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('adresse', TextareaType::class, [
-            'label' => 'Adresse de livraison',
+            'label' => 'commande.address',
             'attr' => ['rows' => 3, 'placeholder' => '12 rue des Cactus, 75001 Paris'],
             'constraints' => [new NotBlank(message: 'Veuillez saisir une adresse de livraison.')],
         ]);

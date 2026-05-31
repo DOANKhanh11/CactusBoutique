@@ -118,15 +118,15 @@
 
 {% block body %}
 <div class="section-header">
-    <h1>🌵 Catalogue de cactus</h1>
+    <h1>🌵 {{ 'cactus.title'|trans }}</h1>
     {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('app_cactus_new') }}" class="btn btn-primary">+ Publier une annonce</a>
+        <a href="{{ path('app_cactus_new') }}" class="btn btn-primary">+ {{ 'cactus.new'|trans }}</a>
     {% endif %}
 </div>
 
 {# ── Search panel ── #}
 <div class="search-panel">
-    <h2>🔍 Recherche avancée</h2>
+    <h2>🔍 {{ 'cactus.search'|trans }}</h2>
     {{ form_start(searchForm, {attr: {novalidate: 'novalidate'}}) }}
     <div class="search-grid">
         <div>
@@ -158,21 +158,21 @@
             {{ form_widget(searchForm.tri) }}
         </div>
         <div class="search-actions">
-            <button type="submit" class="btn btn-primary" style="width:100%;">Rechercher</button>
-            <a href="{{ path('app_cactus_index') }}" class="btn btn-secondary">Réinitialiser</a>
+            <button type="submit" class="btn btn-primary" style="width:100%;">{{ 'search.submit'|trans }}</button>
+            <a href="{{ path('app_cactus_index') }}" class="btn btn-secondary">{{ 'cactus.reset'|trans }}</a>
         </div>
     </div>
     {{ form_end(searchForm) }}
 </div>
 
 {# ── Results ── #}
-<p class="results-count">{{ cacti|length }} résultat{{ cacti|length != 1 ? 's' : '' }} trouvé{{ cacti|length != 1 ? 's' : '' }}</p>
+<p class="results-count">{{ cacti|length }} {{ cacti|length != 1 ? ('cactus.results_plural'|trans) : ('cactus.results'|trans) }}</p>
 
 {% if cacti is empty %}
     <div class="empty-state">
         <div class="icon">🔎</div>
-        <p>Aucun cactus ne correspond à votre recherche.</p>
-        <a href="{{ path('app_cactus_index') }}" class="btn btn-secondary">Voir tous les cactus</a>
+        <p>{{ 'cactus.no_results'|trans }}</p>
+        <a href="{{ path('app_cactus_index') }}" class="btn btn-secondary">{{ 'cactus.title'|trans }}</a>
     </div>
 {% else %}
     <div class="cactus-grid">
@@ -193,12 +193,12 @@
                 {% endif %}
             </div>
             {% if cactu.vendeur %}
-                <div style="font-size:0.8rem;color:var(--text-tertiary);">Vendu par <strong>{{ cactu.vendeur.pseudo }}</strong></div>
+                <div style="font-size:0.8rem;color:var(--text-tertiary);">{{ 'commande.sold_by'|trans }} <strong>{{ cactu.vendeur.pseudo }}</strong></div>
             {% endif %}
             <div class="card-footer">
-                <a href="{{ path('app_cactus_show', {id: cactu.id}) }}" class="btn btn-primary" style="flex:1;justify-content:center;">Voir</a>
+                <a href="{{ path('app_cactus_show', {id: cactu.id}) }}" class="btn btn-primary" style="flex:1;justify-content:center;">{{ 'common.see'|trans }}</a>
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('app_cactus_edit', {id: cactu.id}) }}" class="btn btn-secondary">Modifier</a>
+                    <a href="{{ path('app_cactus_edit', {id: cactu.id}) }}" class="btn btn-secondary">{{ 'cactus.edit'|trans }}</a>
                 {% endif %}
             </div>
         </div>

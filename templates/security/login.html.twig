@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}{{ 'auth.login_title'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Login</h1>
+    <h1>{{ 'auth.login_title'|trans }}</h1>
 
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -11,17 +11,17 @@
 
     <form action="{{ path('app_login') }}" method="post">
         <div>
-            <label for="pseudo">Username</label>
+            <label for="pseudo">{{ 'auth.pseudo'|trans }}</label>
             <input type="text" id="pseudo" name="pseudo" value="{{ last_username }}" required autofocus>
         </div>
         <div>
-            <label for="password">Password</label>
+            <label for="password">{{ 'auth.password'|trans }}</label>
             <input type="password" id="password" name="password" required>
         </div>
-        <button type="submit">Sign in</button>
+        <button type="submit">{{ 'auth.submit_login'|trans }}</button>
     </form>
 
     <p>
-        <a href="{{ path('app_register') }}">Create an account</a>
+        <a href="{{ path('app_register') }}">{{ 'auth.no_account'|trans }}</a>
     </p>
 {% endblock %}

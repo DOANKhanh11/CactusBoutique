@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Utilisateurs — Admin{% endblock %}
+{% block title %}{{ 'admin.users'|trans }} — Admin{% endblock %}
 
 {% block body %}
 <div class="section-header">
-    <h1>👥 Gestion des utilisateurs</h1>
-    <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">← Tableau de bord</a>
+    <h1>👥 {{ 'admin.users'|trans }}</h1>
+    <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">← {{ 'admin.back'|trans }}</a>
 </div>
 
 {% for label, messages in app.flashes %}
     {% for message in messages %}
         <div style="padding:10px 16px;border-radius:8px;margin-bottom:1rem;background:{% if label=='success' %}#e6f4e6{% else %}#fdecea{% endif %};color:{% if label=='success' %}#2a6b2a{% else %}#8b2e2e{% endif %};">
-            {{ message }}
+            {{ message|trans }}
         </div>
     {% endfor %}
 {% endfor %}
@@ -19,11 +19,11 @@
 <table class="data-table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Pseudo</th>
-            <th>Nom</th>
-            <th>Rôles</th>
-            <th>Actions</th>
+            <th>{{ 'admin_dash.id'|trans }}</th>
+            <th>{{ 'admin_dash.pseudo'|trans }}</th>
+            <th>{{ 'admin_dash.name'|trans }}</th>
+            <th>{{ 'admin_dash.roles'|trans }}</th>
+            <th>{{ 'admin_dash.actions'|trans }}</th>
         </tr>
     </thead>
     <tbody>
@@ -41,18 +41,18 @@
             </td>
             <td>
                 <div class="action-btns">
-                    <a href="{{ path('admin_user_role', {id: user.id}) }}" class="action-link">Modifier rôles</a>
+                    <a href="{{ path('admin_user_role', {id: user.id}) }}" class="action-link">{{ 'admin.edit_roles'|trans }}</a>
                     {% if user != app.user %}
-                    <form method="post" action="{{ path('admin_user_delete', {id: user.id}) }}" onsubmit="return confirm('Supprimer cet utilisateur ?')">
+                    <form method="post" action="{{ path('admin_user_delete', {id: user.id}) }}" onsubmit="return confirm('{{ 'admin.delete_confirm'|trans }}')">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete_user_' ~ user.id) }}">
-                        <button type="submit" class="action-link danger" style="background:none;border:none;cursor:pointer;">Supprimer</button>
+                        <button type="submit" class="action-link danger" style="background:none;border:none;cursor:pointer;">{{ 'admin.delete_user'|trans }}</button>
                     </form>
                     {% endif %}
                 </div>
             </td>
         </tr>
         {% else %}
-        <tr class="empty-row"><td colspan="5">Aucun utilisateur trouvé.</td></tr>
+        <tr class="empty-row"><td colspan="5">{{ 'admin_dash.no_users'|trans }}</td></tr>
         {% endfor %}
     </tbody>
 </table>

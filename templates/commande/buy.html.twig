@@ -1,42 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Commander — {{ cactus.name }}{% endblock %}
+{% block title %}{{ 'commande.buy_title'|trans }} — {{ cactus.name }}{% endblock %}
 
 {% block body %}
 <div class="section-header">
-    <h1>🛒 Commander</h1>
-    <a href="{{ path('app_cactus_show', {id: cactus.id}) }}" class="btn btn-secondary">← Retour</a>
+    <h1>🛒 {{ 'commande.buy_title'|trans }}</h1>
+    <a href="{{ path('app_cactus_show', {id: cactus.id}) }}" class="btn btn-secondary">← {{ 'cactus.back'|trans }}</a>
 </div>
 
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;max-width:800px;">
 
     <div style="background:var(--bg-secondary);border-radius:14px;padding:1.5rem;box-shadow:0 1px 3px var(--shadow-light);">
-        <h2 style="margin:0 0 1rem;font-size:1rem;color:var(--heading-color);">🌵 Résumé de la commande</h2>
+        <h2 style="margin:0 0 1rem;font-size:1rem;color:var(--heading-color);">🌵 {{ 'commande.summary'|trans }}</h2>
         <p><strong>{{ cactus.name }}</strong></p>
         <p style="color:var(--text-secondary);font-size:0.875rem;">{{ cactus.description|slice(0,100) }}{% if cactus.description|length > 100 %}…{% endif %}</p>
         <hr style="border:none;border-top:1px solid var(--border-color);margin:1rem 0;">
         <div style="display:flex;justify-content:space-between;align-items:center;">
-            <span style="color:var(--text-secondary);">Prix unitaire</span>
+            <span style="color:var(--text-secondary);">{{ 'commande.unit_price'|trans }}</span>
             <strong>{{ cactus.prix|number_format(2, ',', ' ') }} €</strong>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem;">
-            <span style="color:var(--text-secondary);">Quantité</span>
+            <span style="color:var(--text-secondary);">{{ 'commande.quantity'|trans }}</span>
             <strong>1</strong>
         </div>
         <hr style="border:none;border-top:1px solid var(--border-color);margin:1rem 0;">
         <div style="display:flex;justify-content:space-between;align-items:center;font-size:1.2rem;font-weight:700;">
-            <span>Total</span>
+            <span>{{ 'commande.total'|trans }}</span>
             <span style="color:var(--link-color);">{{ cactus.prix|number_format(2, ',', ' ') }} €</span>
         </div>
         {% if cactus.vendeur %}
         <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:1rem;">
-            Vendu par <a href="{{ path('app_seller_show', {id: cactus.vendeur.id}) }}" class="action-link">{{ cactus.vendeur.pseudo }}</a>
+            {{ 'commande.sold_by'|trans }} <a href="{{ path('app_seller_show', {id: cactus.vendeur.id}) }}" class="action-link">{{ cactus.vendeur.pseudo }}</a>
         </p>
         {% endif %}
     </div>
 
     <div style="background:var(--bg-secondary);border-radius:14px;padding:1.5rem;box-shadow:0 1px 3px var(--shadow-light);">
-        <h2 style="margin:0 0 1rem;font-size:1rem;color:var(--heading-color);">📦 Livraison</h2>
+        <h2 style="margin:0 0 1rem;font-size:1rem;color:var(--heading-color);">📦 {{ 'commande.delivery'|trans }}</h2>
         {{ form_start(form) }}
             <div style="margin-bottom:1rem;">
                 {{ form_label(form.adresse, null, {label_attr: {style: 'display:block;font-size:0.8rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;'}}) }}
@@ -46,7 +46,7 @@
                 {% endif %}
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;">
-                ✅ Confirmer la commande
+                ✅ {{ 'commande.confirm'|trans }}
             </button>
         {{ form_end(form) }}
     </div>

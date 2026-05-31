@@ -41,7 +41,7 @@ class AdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
-            $this->addFlash('success', 'Rôles mis à jour pour ' . $user->getPseudo());
+            $this->addFlash('success', 'admin.roles_updated');
             return $this->redirectToRoute('admin_users');
         }
 
@@ -57,7 +57,7 @@ class AdminController extends AbstractController
         if ($this->isCsrfTokenValid('delete_user_' . $user->getId(), $request->request->get('_token'))) {
             $em->remove($user);
             $em->flush();
-            $this->addFlash('success', 'Utilisateur supprimé.');
+            $this->addFlash('success', 'admin.user_deleted');
         }
 
         return $this->redirectToRoute('admin_users');

@@ -5,21 +5,21 @@
 {% block body %}
 <div class="section-header">
     <h1>🪴 {{ pot.name }}</h1>
-    <a href="{{ path('app_pot_index') }}" class="btn btn-secondary">← Retour</a>
+    <a href="{{ path('app_pot_index') }}" class="btn btn-secondary">← {{ 'pot.back'|trans }}</a>
 </div>
 
 <div style="max-width:540px;background:var(--bg-secondary);border-radius:14px;padding:2rem;box-shadow:0 1px 3px var(--shadow-light);">
     <table class="data-table" style="margin-bottom:1.5rem;">
         <tbody>
-            <tr><td><strong>Matériau</strong></td><td>{{ pot.material }}</td></tr>
-            <tr><td><strong>Couleur</strong></td><td>{{ pot.couleur }}</td></tr>
-            <tr><td><strong>Prix</strong></td><td><span class="badge badge-green">{{ pot.prix }} €</span></td></tr>
+            <tr><td><strong>{{ 'pot.material'|trans }}</strong></td><td>{{ pot.material }}</td></tr>
+            <tr><td><strong>{{ 'pot.couleur'|trans }}</strong></td><td>{{ pot.couleur }}</td></tr>
+            <tr><td><strong>{{ 'pot.price'|trans }}</strong></td><td><span class="badge badge-green">{{ pot.prix }} €</span></td></tr>
         </tbody>
     </table>
 
     {% if is_granted('ROLE_ADMIN') %}
     <div class="action-btns">
-        <a href="{{ path('app_pot_edit', {id: pot.id}) }}" class="btn btn-primary">✏️ Modifier</a>
+        <a href="{{ path('app_pot_edit', {id: pot.id}) }}" class="btn btn-primary">✏️ {{ 'common.edit'|trans }}</a>
         {{ include('pot/_delete_form.html.twig') }}
     </div>
     {% endif %}

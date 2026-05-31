@@ -5,7 +5,7 @@
 {% block body %}
 <div class="section-header">
     <h1>🌵 {{ cactu.name }}</h1>
-    <a href="{{ path('app_cactus_index') }}" class="btn btn-secondary">← Retour</a>
+    <a href="{{ path('app_cactus_index') }}" class="btn btn-secondary">← {{ 'cactus.back'|trans }}</a>
 </div>
 
 <div style="max-width:640px;background:var(--bg-secondary);border-radius:14px;padding:2rem;box-shadow:0 1px 3px var(--shadow-light);">
@@ -17,30 +17,30 @@
 
     <table class="data-table" style="margin-bottom:1.5rem;">
         <tbody>
-            <tr><td><strong>Catégorie</strong></td><td>{{ cactu.categorie ? cactu.categorie.name : '—' }}</td></tr>
-            <tr><td><strong>Niveau de soin</strong></td><td>{{ cactu.niveauSoin }}</td></tr>
-            <tr><td><strong>Arrosage</strong></td><td>{{ cactu.arrosage }}</td></tr>
-            <tr><td><strong>Taille</strong></td><td>{{ cactu.taille }} cm</td></tr>
-            <tr><td><strong>Vendeur</strong></td><td>{{ cactu.vendeur ? cactu.vendeur.pseudo : '—' }}</td></tr>
-            <tr><td><strong>Expiration</strong></td><td>{{ cactu.dateExpiration ? cactu.dateExpiration|date('d/m/Y') : 'Aucune' }}</td></tr>
+            <tr><td><strong>{{ 'cactus.category'|trans }}</strong></td><td>{{ cactu.categorie ? cactu.categorie.name : '—' }}</td></tr>
+            <tr><td><strong>{{ 'cactus.care'|trans }}</strong></td><td>{{ cactu.niveauSoin }}</td></tr>
+            <tr><td><strong>{{ 'cactus.watering'|trans }}</strong></td><td>{{ cactu.arrosage }}</td></tr>
+            <tr><td><strong>{{ 'cactus.size'|trans }}</strong></td><td>{{ cactu.taille }} cm</td></tr>
+            <tr><td><strong>{{ 'cactus.seller'|trans }}</strong></td><td>{{ cactu.vendeur ? cactu.vendeur.pseudo : '—' }}</td></tr>
+            <tr><td><strong>{{ 'cactus.expiry'|trans }}</strong></td><td>{{ cactu.dateExpiration ? cactu.dateExpiration|date('d/m/Y') : ('cactus.no_expiry'|trans) }}</td></tr>
         </tbody>
     </table>
 
     <div class="action-btns">
         {% if is_granted('ROLE_USER') %}
             {% if app.user != cactu.vendeur %}
-                <a href="{{ path('app_commande_buy', {id: cactu.id}) }}" class="btn btn-primary">🛒 Acheter</a>
+                <a href="{{ path('app_commande_buy', {id: cactu.id}) }}" class="btn btn-primary">🛒 {{ 'commande.buy'|trans }}</a>
             {% endif %}
             <form action="{{ path('app_cactus_favorite', {id: cactu.id}) }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token('favorite' ~ cactu.id) }}">
                 <button type="submit" class="btn btn-secondary">
-                    {{ cactu in app.user.favorites ? '💔 Retirer des favoris' : '❤️ Ajouter aux favoris' }}
+                    {{ cactu in app.user.favorites ? '💔 ' ~ ('cactus.remove_favorite'|trans) : '❤️ ' ~ ('cactus.add_favorite'|trans) }}
                 </button>
             </form>
         {% endif %}
 
         {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('app_cactus_edit', {id: cactu.id}) }}" class="btn btn-secondary">✏️ Modifier</a>
+            <a href="{{ path('app_cactus_edit', {id: cactu.id}) }}" class="btn btn-secondary">✏️ {{ 'cactus.edit'|trans }}</a>
             {{ include('cactus/_delete_form.html.twig') }}
         {% endif %}
     </div>

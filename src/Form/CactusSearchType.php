@@ -19,50 +19,49 @@ class CactusSearchType extends AbstractType
         $builder
             ->add('nom', TextType::class, [
                 'required' => false,
-                'label' => 'Nom',
-                'attr' => ['placeholder' => 'Rechercher par nom…'],
+                'label' => 'search.name',
             ])
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
                 'choice_label' => 'name',
                 'required' => false,
-                'label' => 'Catégorie',
-                'placeholder' => 'Toutes',
+                'label' => 'search.category',
+                'placeholder' => 'search.all_categories',
             ])
             ->add('niveauSoin', ChoiceType::class, [
                 'required' => false,
-                'label' => 'Niveau de soin',
-                'placeholder' => 'Tous',
+                'label' => 'search.care_level',
+                'placeholder' => 'search.all_levels',
                 'choices' => [
-                    'Facile' => 'Facile',
-                    'Moyen' => 'Moyen',
-                    'Difficile' => 'Difficile',
+                    'cactus.easy' => 'Facile',
+                    'cactus.medium' => 'Moyen',
+                    'cactus.hard' => 'Difficile',
                 ],
             ])
             ->add('prixMin', NumberType::class, [
                 'required' => false,
-                'label' => 'Prix min (€)',
+                'label' => 'search.price_min',
                 'attr' => ['placeholder' => '0'],
             ])
             ->add('prixMax', NumberType::class, [
                 'required' => false,
-                'label' => 'Prix max (€)',
+                'label' => 'search.price_max',
                 'attr' => ['placeholder' => '999'],
             ])
             ->add('expirationAvant', DateType::class, [
                 'required' => false,
-                'label' => 'Expire avant le',
+                'label' => 'search.expiry_before',
                 'widget' => 'single_text',
             ])
             ->add('tri', ChoiceType::class, [
                 'required' => false,
-                'label' => 'Trier par',
-                'placeholder' => 'Pertinence',
+                'label' => 'search.sort',
+                'placeholder' => 'search.sort_default',
                 'choices' => [
-                    'Prix croissant' => 'prix_asc',
-                    'Prix décroissant' => 'prix_desc',
-                    'Plus récent' => 'date_desc',
-                    'Expiration proche' => 'expiration_asc',
+                    'search.sort_price_asc' => 'prix_asc',
+                    'search.sort_price_desc' => 'prix_desc',
+                    'search.sort_newest' => 'date_desc',
+                    'search.sort_expiry' => 'expiration_asc',
                 ],
             ]);
     }

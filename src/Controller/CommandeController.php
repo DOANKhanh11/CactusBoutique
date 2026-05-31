@@ -22,7 +22,7 @@ class CommandeController extends AbstractController
     public function buy(Cactus $cactus, Request $request, EntityManagerInterface $em): Response
     {
         if ($cactus->getVendeur() === $this->getUser()) {
-            $this->addFlash('error', 'Vous ne pouvez pas acheter votre propre annonce.');
+            $this->addFlash('error', 'commande.self_buy_error');
             return $this->redirectToRoute('app_cactus_show', ['id' => $cactus->getId()]);
         }
 
@@ -46,7 +46,7 @@ class CommandeController extends AbstractController
             $em->persist($ligne);
             $em->flush();
 
-            $this->addFlash('success', 'Commande passée avec succès !');
+            $this->addFlash('success', 'commande.success');
             return $this->redirectToRoute('app_commande_show', ['id' => $commande->getId()]);
         }
 

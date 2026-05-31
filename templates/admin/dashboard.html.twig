@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Administration — Cactus Boutique{% endblock %}
+{% block title %}{{ 'admin.title'|trans }} — Cactus Boutique{% endblock %}
 
 {% block body %}
 <div class="section-header">
-    <h1>🛡️ Administration</h1>
+    <h1>🛡️ {{ 'admin.title'|trans }}</h1>
 </div>
 
 {% for label, messages in app.flashes %}
     {% for message in messages %}
         <div class="alert alert-{{ label }}" style="padding:10px 16px;border-radius:8px;margin-bottom:1rem;background:{% if label=='success' %}#e6f4e6{% else %}#fdecea{% endif %};color:{% if label=='success' %}#2a6b2a{% else %}#8b2e2e{% endif %};">
-            {{ message }}
+            {{ message|trans }}
         </div>
     {% endfor %}
 {% endfor %}
@@ -18,8 +18,8 @@
 <div class="feature-grid" style="margin-bottom:2rem;">
     <a href="{{ path('admin_users') }}" class="feature-card">
         <span class="feature-icon">👥</span>
-        <h3>Utilisateurs</h3>
-        <p>{{ total_users }} comptes enregistrés</p>
+        <h3>{{ 'admin.users'|trans }}</h3>
+        <p>{{ total_users }} {{ 'admin_dash.accounts'|trans }}</p>
     </a>
 </div>
 {% endblock %}

@@ -1,23 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Catégories{% endblock %}
+{% block title %}{{ 'categorie.title'|trans }}{% endblock %}
 
 {% block body %}
     <div class="section-header">
-        <h1>📂 Catégories</h1>
+        <h1>📂 {{ 'categorie.title'|trans }}</h1>
         {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('app_categorie_new') }}" class="btn btn-primary">+ Nouveau</a>
+            <a href="{{ path('app_categorie_new') }}" class="btn btn-primary">+ {{ 'common.new'|trans }}</a>
         {% endif %}
     </div>
 
     <table class="data-table">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Environnement</th>
-                <th>Actions</th>
+                <th>{{ 'common.id'|trans }}</th>
+                <th>{{ 'categorie.name'|trans }}</th>
+                <th>{{ 'categorie.description'|trans }}</th>
+                <th>{{ 'categorie.environnement'|trans }}</th>
+                <th>{{ 'common.actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -29,16 +29,16 @@
                 <td><span class="badge badge-sand">{{ categorie.environnement }}</span></td>
                 <td>
                     <div class="action-btns">
-                        <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="action-link">Voir</a>
+                        <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="action-link">{{ 'common.see'|trans }}</a>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="action-link">Modifier</a>
+                            <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="action-link">{{ 'common.edit'|trans }}</a>
                         {% endif %}
                     </div>
                 </td>
             </tr>
         {% else %}
             <tr class="empty-row">
-                <td colspan="5">Aucune catégorie enregistrée.</td>
+                <td colspan="5">—</td>
             </tr>
         {% endfor %}
         </tbody>

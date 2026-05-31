@@ -1,24 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pots{% endblock %}
+{% block title %}{{ 'pot.title'|trans }}{% endblock %}
 
 {% block body %}
 <div class="section-header">
-    <h1>🪴 Pots</h1>
+    <h1>🪴 {{ 'pot.title'|trans }}</h1>
     {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('app_pot_new') }}" class="btn btn-primary">+ Nouveau</a>
+        <a href="{{ path('app_pot_new') }}" class="btn btn-primary">+ {{ 'common.new'|trans }}</a>
     {% endif %}
 </div>
 
 <table class="data-table">
     <thead>
         <tr>
-            <th>#</th>
-            <th>Nom</th>
-            <th>Matériau</th>
-            <th>Couleur</th>
-            <th>Prix</th>
-            <th>Actions</th>
+            <th>{{ 'common.id'|trans }}</th>
+            <th>{{ 'pot.name'|trans }}</th>
+            <th>{{ 'pot.material'|trans }}</th>
+            <th>{{ 'pot.couleur'|trans }}</th>
+            <th>{{ 'pot.price'|trans }}</th>
+            <th>{{ 'common.actions'|trans }}</th>
         </tr>
     </thead>
     <tbody>
@@ -31,15 +31,15 @@
             <td><span class="badge badge-green">{{ pot.prix }} €</span></td>
             <td>
                 <div class="action-btns">
-                    <a href="{{ path('app_pot_show', {id: pot.id}) }}" class="action-link">Voir</a>
+                    <a href="{{ path('app_pot_show', {id: pot.id}) }}" class="action-link">{{ 'common.see'|trans }}</a>
                     {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('app_pot_edit', {id: pot.id}) }}" class="action-link">Modifier</a>
+                        <a href="{{ path('app_pot_edit', {id: pot.id}) }}" class="action-link">{{ 'common.edit'|trans }}</a>
                     {% endif %}
                 </div>
             </td>
         </tr>
     {% else %}
-        <tr class="empty-row"><td colspan="6">Aucun pot enregistré.</td></tr>
+        <tr class="empty-row"><td colspan="6">—</td></tr>
     {% endfor %}
     </tbody>
 </table>

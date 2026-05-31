@@ -151,6 +151,70 @@ flash:
     language_changed_fr: Langue changée en Français.
     language_changed_en: Language changed to English.
 
+# Pot
+pot:
+    title: Pots
+    name: Nom
+    material: Matériau
+    couleur: Couleur
+    price: Prix
+    new: Nouveau pot
+    back: Retour
+
+# Categorie
+categorie:
+    title: Catégories
+    name: Nom
+    description: Description
+    environnement: Environnement
+    new: Nouvelle catégorie
+    back: Retour
+
+# Terreau
+terreau:
+    title: Terreaux
+    name: Nom
+    composition: Composition
+    price: Prix
+    new: Nouveau terreau
+    back: Retour
+
+# Commande
+commande:
+    buy: Acheter
+    buy_title: Commander
+    summary: Résumé de la commande
+    unit_price: Prix unitaire
+    quantity: Quantité
+    total: Total
+    sold_by: Vendu par
+    delivery: Livraison
+    address: Adresse de livraison
+    confirm: Confirmer la commande
+    my_orders: Mes commandes
+    order: Commande
+    date: Date
+    status: Statut
+    article: Article
+    subtotal: Sous-total
+    deleted_article: Article supprimé
+    no_orders: Aucune commande pour le moment.
+    catalog: Catalogue
+    success: Commande passée avec succès !
+    self_buy_error: Vous ne pouvez pas acheter votre propre annonce.
+
+# Admin dashboard
+admin_dash:
+    accounts: comptes enregistrés
+    id: ID
+    pseudo: Pseudo
+    name: Nom
+    roles: Rôles
+    actions: Actions
+    no_users: Aucun utilisateur trouvé.
+    edit_title: Rôles de
+    save: Enregistrer
+
 # Common
 common:
     back: Retour
@@ -164,3 +228,5 @@ common:
     actions: Actions
     see: Voir
     new: Nouveau
+    create: Créer
+    id: "#"

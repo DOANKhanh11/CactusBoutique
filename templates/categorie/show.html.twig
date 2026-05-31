@@ -5,20 +5,20 @@
 {% block body %}
 <div class="section-header">
     <h1>📁 {{ categorie.name }}</h1>
-    <a href="{{ path('app_categorie_index') }}" class="btn btn-secondary">← Retour</a>
+    <a href="{{ path('app_categorie_index') }}" class="btn btn-secondary">← {{ 'categorie.back'|trans }}</a>
 </div>
 
 <div style="max-width:540px;background:var(--bg-secondary);border-radius:14px;padding:2rem;box-shadow:0 1px 3px var(--shadow-light);">
     <table class="data-table" style="margin-bottom:1.5rem;">
         <tbody>
-            <tr><td><strong>Description</strong></td><td>{{ categorie.description }}</td></tr>
-            <tr><td><strong>Environnement</strong></td><td><span class="badge badge-sand">{{ categorie.environnement }}</span></td></tr>
+            <tr><td><strong>{{ 'categorie.description'|trans }}</strong></td><td>{{ categorie.description }}</td></tr>
+            <tr><td><strong>{{ 'categorie.environnement'|trans }}</strong></td><td><span class="badge badge-sand">{{ categorie.environnement }}</span></td></tr>
         </tbody>
     </table>
 
     {% if is_granted('ROLE_ADMIN') %}
     <div class="action-btns">
-        <a href="{{ path('app_categorie_edit', {id: categorie.id}) }}" class="btn btn-primary">✏️ Modifier</a>
+        <a href="{{ path('app_categorie_edit', {id: categorie.id}) }}" class="btn btn-primary">✏️ {{ 'common.edit'|trans }}</a>
         {{ include('categorie/_delete_form.html.twig') }}
     </div>
     {% endif %}

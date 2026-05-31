@@ -40,7 +40,7 @@ class SellerController extends AbstractController
                 $comment->setDateCree(new \DateTime());
                 $em->persist($comment);
                 $em->flush();
-                $this->addFlash('success', 'Commentaire publié.');
+                $this->addFlash('success', 'flash.comment_published');
                 return $this->redirectToRoute('app_seller_show', ['id' => $seller->getId()]);
             }
 
@@ -50,7 +50,7 @@ class SellerController extends AbstractController
         if ($request->isMethod('POST') && $request->request->has('score')) {
             $this->denyAccessUnlessGranted('ROLE_USER');
             if ($this->getUser() === $seller) {
-                $this->addFlash('error', 'Vous ne pouvez pas vous noter vous-même.');
+                $this->addFlash('error', 'seller.self_rating_error');
                 return $this->redirectToRoute('app_seller_show', ['id' => $seller->getId()]);
             }
             $score = (int) $request->request->get('score');
@@ -64,7 +64,7 @@ class SellerController extends AbstractController
                 }
                 $em->persist($rating);
                 $em->flush();
-                $this->addFlash('success', 'Note enregistrée.');
+                $this->addFlash('success', 'flash.rating_saved');
             }
             return $this->redirectToRoute('app_seller_show', ['id' => $seller->getId()]);
         }
@@ -98,7 +98,7 @@ class SellerController extends AbstractController
         if ($this->isCsrfTokenValid('delete_comment_' . $commentId, $request->request->get('_token'))) {
             $em->remove($comment);
             $em->flush();
-            $this->addFlash('success', 'Commentaire supprimé.');
+            $this->addFlash('success', 'flash.comment_deleted');
         }
         return $this->redirectToRoute('app_seller_show', ['id' => $seller->getId()]);
     }

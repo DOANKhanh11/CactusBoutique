@@ -1,18 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{{ 'auth.register_title'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <h1>{{ 'auth.register_title'|trans }}</h1>
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.nom) }}
         {{ form_row(registrationForm.prenom) }}
         {{ form_row(registrationForm.pseudo) }}
         {{ form_row(registrationForm.password) }}
+        <button type="submit" class="btn btn-primary">{{ 'auth.submit_register'|trans }}</button>
     {{ form_end(registrationForm) }}
 
     <p>
-        <a href="{{ path('app_login') }}">Already have an account? Log in</a>
+        <a href="{{ path('app_login') }}">{{ 'auth.already_account'|trans }}</a>
     </p>
 {% endblock %}
