@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
+use App\Repository\RatingRepository;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\User;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: RatingRepository::class)]
+#[ORM\UniqueConstraint(name: 'unique_rating', columns: ['rater_id', 'vendeur_id'])]
 class Rating
 {
     #[ORM\Id]
@@ -16,13 +17,13 @@ class Rating
     #[ORM\Column]
     private ?int $score = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $rater = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $target = null;
+    private ?User $vendeur = null;
 
     #[ORM\Column]
     private ?\DateTime $createdAt = null;
@@ -32,59 +33,24 @@ class Rating
         $this->createdAt = new \DateTime();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    public function getId(): ?int { return $this->id; }
 
-    public function getScore(): ?int
-    {
-        return $this->score;
-    }
-
+    public function getScore(): ?int { return $this->score; }
     public function setScore(int $score): static
     {
         if ($score < 1 || $score > 5) {
             throw new \InvalidArgumentException('Score must be between 1 and 5.');
         }
         $this->score = $score;
-
         return $this;
     }
 
-    public function getRater(): ?User
-    {
-        return $this->rater;
-    }
+    public function getRater(): ?User { return $this->rater; }
+    public function setRater(User $rater): static { $this->rater = $rater; return $this; }
 
-    public function setRater(User $rater): static
-    {
-        $this->rater = $rater;
+    public function getVendeur(): ?User { return $this->vendeur; }
+    public function setVendeur(User $vendeur): static { $this->vendeur = $vendeur; return $this; }
 
-        return $this;
-    }
-
-    public function getTarget(): ?User
-    {
-        return $this->target;
-    }
-
-    public function setTarget(User $target): static
-    {
-        $this->target = $target;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTime
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTime $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
+    public function getCreatedAt(): ?\DateTime { return $this->createdAt; }
+    public function setCreatedAt(\DateTime $createdAt): static { $this->createdAt = $createdAt; return $this; }
 }

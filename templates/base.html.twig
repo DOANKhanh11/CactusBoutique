@@ -451,31 +451,28 @@
 
         {% block javascripts %}
         <script>
-            // Detect and apply user theme preference
+            // Apply theme: server preference takes priority over localStorage
             (function() {
                 const themeKey = 'cactus_boutique_theme';
-                const savedTheme = localStorage.getItem(themeKey);
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-                
+                const serverTheme = '{{ user_theme() }}';
+                // Server preference always wins (set to 'light' for guests)
+                const theme = serverTheme;
+
                 document.documentElement.setAttribute('data-theme', theme);
                 localStorage.setItem(themeKey, theme);
             })();
 
-            // Function to toggle theme
+            // Toggle theme and persist to server + localStorage
             function toggleTheme(newTheme = null) {
                 const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
                 const theme = newTheme || (currentTheme === 'light' ? 'dark' : 'light');
-                
+
                 document.documentElement.setAttribute('data-theme', theme);
                 localStorage.setItem('cactus_boutique_theme', theme);
-                
-                // Optional: Send to server if user is logged in
-                if (newTheme) {
-                    fetch('/preferences/api/theme/' + theme, { method: 'POST' })
-                        .catch(err => console.log('Theme saved to server'));
-                }
-                
+
+                fetch('/preferences/api/theme/' + theme, { method: 'POST' })
+                    .catch(() => {});
+
                 return theme;
             }
 
