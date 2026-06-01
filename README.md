@@ -28,7 +28,7 @@ symfony server:start
 ➡️ **Guide de test des fonctionnalités** : voir [GUIDE_TEST.md](GUIDE_TEST.md)
 
 ## 🔗 Application en ligne
-https://cactusboutique.alwaysdata.net/cactus
+https://cactusboutique.alwaysdata.net/home
 
 ## Comptes de démonstration
 
