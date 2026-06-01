@@ -61,11 +61,14 @@ class PreferenceController extends AbstractController
     #[Route('/theme/{theme}', name: 'app_theme_set', methods: ['POST', 'GET'])]
     public function setTheme(string $theme, Request $request): Response
     {
-        try {
-            $this->themeService->setUserTheme($theme);
-            $this->addFlash('success', sprintf('Theme changed to %s mode', $theme));
-        } catch (\Exception $e) {
-            $this->addFlash('error', 'Failed to change theme: ' . $e->getMessage());
+        $request->getSession()->set('_theme', $theme);
+
+        if ($this->getUser()) {
+            try {
+                $this->themeService->setUserTheme($theme);
+            } catch (\Exception $e) {
+                // ignore: handled client-side via localStorage
+            }
         }
 
         $referer = $request->headers->get('referer');
@@ -78,12 +81,20 @@ class PreferenceController extends AbstractController
     #[Route('/language/{language}', name: 'app_preferences_language', methods: ['POST', 'GET'])]
     public function setLanguage(string $language, Request $request): Response
     {
-        try {
-            $this->themeService->setUserLanguage($language);
-            $request->getSession()->set('_locale', $language);
-            $this->addFlash('success', sprintf('Language changed to %s', $language === 'fr' ? 'Français' : 'English'));
-        } catch (\Exception $e) {
-            $this->addFlash('error', 'Failed to change language: ' . $e->getMessage());
+        if (!in_array($language, ['fr', 'en'], true)) {
+            $language = 'fr';
+        }
+
+        // Always store in session so the locale switch works for everyone
+        $request->getSession()->set('_locale', $language);
+
+        // Persist to the database only when the visitor is authenticated
+        if ($this->getUser()) {
+            try {
+                $this->themeService->setUserLanguage($language);
+            } catch (\Exception $e) {
+                // ignore: session locale already applied
+            }
         }
 
         $referer = $request->headers->get('referer');

@@ -452,12 +452,21 @@
 
         {% block javascripts %}
         <script>
-            // Apply theme: server preference takes priority over localStorage
+            // Apply theme.
+            // - Logged-in users: DB preference wins.
+            // - Anonymous users: use the session/localStorage choice so it
+            //   persists across page changes.
             (function() {
                 const themeKey = 'cactus_boutique_theme';
+                {% if app.user %}
                 const serverTheme = '{{ user_theme() }}';
-                // Server preference always wins (set to 'light' for guests)
-                const theme = serverTheme;
+                {% else %}
+                const serverTheme = '{{ app.request.session.get('_theme') }}';
+                {% endif %}
+                const localTheme = localStorage.getItem(themeKey);
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                const theme = serverTheme || localTheme || (prefersDark ? 'dark' : 'light');
 
                 document.documentElement.setAttribute('data-theme', theme);
                 localStorage.setItem(themeKey, theme);

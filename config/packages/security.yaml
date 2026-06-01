@@ -38,6 +38,10 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
+        # Language + theme switching must work for anonymous visitors too
+        - { path: ^/preferences/language, roles: PUBLIC_ACCESS }
+        - { path: ^/preferences/theme, roles: PUBLIC_ACCESS }
+        - { path: ^/preferences/api/theme, roles: PUBLIC_ACCESS }
         - { path: ^/preferences, roles: ROLE_USER }
         - { path: ^/cactus/new, roles: ROLE_USER }
         - { path: ^/cactus/.*/edit, roles: ROLE_USER }
