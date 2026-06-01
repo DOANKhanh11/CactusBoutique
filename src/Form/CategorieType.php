@@ -12,9 +12,9 @@ class CategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('environnement')
+            ->add('name', null, ['label' => 'categorie.name'])
+            ->add('description', null, ['label' => 'categorie.description'])
+            ->add('environnement', null, ['label' => 'categorie.environnement'])
         ;
     }
 

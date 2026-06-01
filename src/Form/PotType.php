@@ -12,10 +12,10 @@ class PotType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('material')
-            ->add('couleur')
-            ->add('prix')
+            ->add('name', null, ['label' => 'pot.name'])
+            ->add('material', null, ['label' => 'pot.material'])
+            ->add('couleur', null, ['label' => 'pot.couleur'])
+            ->add('prix', null, ['label' => 'pot.price'])
         ;
     }
 

@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Cactus{% endblock %}
+{% block title %}{{ 'form.create_cactus'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new Cactus</h1>
+    <h1>{{ 'form.create_cactus'|trans }}</h1>
 
     {{ include('cactus/_form.html.twig') }}
 
-    <a href="{{ path('app_cactus_index') }}">back to list</a>
+    <a href="{{ path('app_cactus_index') }}">{{ 'form.back_to_list'|trans }}</a>
 {% endblock %}

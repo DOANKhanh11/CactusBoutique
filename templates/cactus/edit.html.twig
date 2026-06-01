@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Cactus{% endblock %}
+{% block title %}{{ 'form.edit_cactus'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Edit Cactus</h1>
+    <h1>{{ 'form.edit_cactus'|trans }}</h1>
 
-    {{ include('cactus/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('cactus/_form.html.twig', {'button_label': 'form.update'|trans}) }}
 
-    <a href="{{ path('app_cactus_index') }}">back to list</a>
+    <a href="{{ path('app_cactus_index') }}">{{ 'form.back_to_list'|trans }}</a>
 
     {{ include('cactus/_delete_form.html.twig') }}
 {% endblock %}

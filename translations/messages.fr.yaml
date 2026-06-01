@@ -215,6 +215,22 @@ admin_dash:
     edit_title: Rôles de
     save: Enregistrer
 
+# Form (create/edit)
+form:
+    create_cactus: Créer un nouveau cactus
+    edit_cactus: Modifier le cactus
+    create_pot: Créer un nouveau pot
+    edit_pot: Modifier le pot
+    create_categorie: Créer une nouvelle catégorie
+    edit_categorie: Modifier la catégorie
+    create_terreau: Créer un nouveau terreau
+    edit_terreau: Modifier le terreau
+    back_to_list: Retour à la liste
+    save: Enregistrer
+    update: Mettre à jour
+    delete: Supprimer
+    delete_confirm: Voulez-vous vraiment supprimer cet élément ?
+
 # Common
 common:
     back: Retour

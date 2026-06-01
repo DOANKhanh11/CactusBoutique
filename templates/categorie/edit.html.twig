@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Categorie{% endblock %}
+{% block title %}{{ 'form.edit_categorie'|trans }}{% endblock %}
 
 {% block body %}
     <div class="section-header">
-        <h1>📂 Catégories</h1>
+        <h1>📂 {{ 'form.edit_categorie'|trans }}</h1>
     </div>
 
-    {{ include('categorie/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('categorie/_form.html.twig', {'button_label': 'form.update'|trans}) }}
 
-    <a href="{{ path('app_categorie_index') }}" class="btn btn-secondary">Back to list</a>
+    <a href="{{ path('app_categorie_index') }}" class="btn btn-secondary">{{ 'form.back_to_list'|trans }}</a>
 
     {{ include('categorie/_delete_form.html.twig') }}
 {% endblock %}

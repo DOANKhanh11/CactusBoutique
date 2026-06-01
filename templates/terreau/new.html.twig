@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Terreau{% endblock %}
+{% block title %}{{ 'form.create_terreau'|trans }}{% endblock %}
 
 {% block body %}
      <div class="section-header">
-        <h1>🌱 Nouveau Terreau</h1>
+        <h1>🌱 {{ 'form.create_terreau'|trans }}</h1>
     </div>
 
     {{ include('terreau/_form.html.twig') }}
 
-    <a href="{{ path('app_terreau_index') }}" class="btn btn-secondary">Back to list</a>
+    <a href="{{ path('app_terreau_index') }}" class="btn btn-secondary">{{ 'form.back_to_list'|trans }}</a>
 {% endblock %}

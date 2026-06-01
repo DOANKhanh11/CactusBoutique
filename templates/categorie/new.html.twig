@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Categorie{% endblock %}
+{% block title %}{{ 'form.create_categorie'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new Categorie</h1>
+    <h1>{{ 'form.create_categorie'|trans }}</h1>
 
     {{ include('categorie/_form.html.twig') }}
 
-    <a href="{{ path('app_categorie_index') }}">back to list</a>
+    <a href="{{ path('app_categorie_index') }}">{{ 'form.back_to_list'|trans }}</a>
 {% endblock %}

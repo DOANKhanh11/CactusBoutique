@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Pot{% endblock %}
+{% block title %}{{ 'form.edit_pot'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Edit Pot</h1>
+    <h1>{{ 'form.edit_pot'|trans }}</h1>
 
-    {{ include('pot/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('pot/_form.html.twig', {'button_label': 'form.update'|trans}) }}
 
-    <a href="{{ path('app_pot_index') }}">back to list</a>
+    <a href="{{ path('app_pot_index') }}">{{ 'form.back_to_list'|trans }}</a>
 
     {{ include('pot/_delete_form.html.twig') }}
 {% endblock %}

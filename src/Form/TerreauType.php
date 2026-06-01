@@ -12,9 +12,9 @@ class TerreauType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('composition')
-            ->add('prix')
+            ->add('name', null, ['label' => 'terreau.name'])
+            ->add('composition', null, ['label' => 'terreau.composition'])
+            ->add('prix', null, ['label' => 'terreau.price'])
         ;
     }
 
