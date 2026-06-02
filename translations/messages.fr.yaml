@@ -129,6 +129,7 @@ admin:
     roles_updated: Rôles mis à jour pour
     user_deleted: Utilisateur supprimé.
     back: Tableau de bord
+    data: Données de prix
 
 # Preferences
 preferences:
@@ -214,6 +215,7 @@ admin_dash:
     no_users: Aucun utilisateur trouvé.
     edit_title: Rôles de
     save: Enregistrer
+    entries: Entrées
 
 # Form (create/edit)
 form:

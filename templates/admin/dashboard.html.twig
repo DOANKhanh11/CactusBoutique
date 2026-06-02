@@ -22,4 +22,12 @@
         <p>{{ total_users }} {{ 'admin_dash.accounts'|trans }}</p>
     </a>
 </div>
+
+<div class="feature-grid" style="margin-bottom:2rem;">
+    <a href="{{ path('admin_data') }}" class="feature-card">
+        <span class="feature-icon">👥</span>
+        <h3>{{ 'admin.data'|trans }}</h3>
+        <p>{{ total_data }} {{ 'admin_dash.entries'|trans }}</p>
+    </a>
+</div>
 {% endblock %}

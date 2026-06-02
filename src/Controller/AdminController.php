@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserRoleType;
+use App\Repository\CactusRepository;
+use App\Repository\PotRepository;
+use App\Repository\TerreauRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,6 +33,31 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/users/index.html.twig', [
             'users' => $userRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/data', name: 'admin_data')]
+    public function data(
+        CactusRepository $cactusRepository,
+        TerreauRepository $terreauRepository,
+        PotRepository $potRepository
+    ): Response {
+        $cacti = $cactusRepository->findAll();
+        $terreaux = $terreauRepository->findAll();
+        $pots = $potRepository->findAll();
+
+        $totalCactus = array_sum(array_map(fn($c) => $c->getPrix(), $cacti));
+        $totalTerreau = array_sum(array_map(fn($t) => $t->getPrix(), $terreaux));
+        $totalPot = array_sum(array_map(fn($p) => $p->getPrix(), $pots));
+
+        return $this->render('admin/data/index.html.twig', [
+            'cacti' => $cacti,
+            'terreaux' => $terreaux,
+            'pots' => $pots,
+            'totalCactus' => $totalCactus,
+            'totalTerreau' => $totalTerreau,
+            'totalPot' => $totalPot,
+            'grandTotal' => $totalCactus + $totalTerreau + $totalPot,
         ]);
     }
 

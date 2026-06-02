@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'admin.title'|trans }} — Données{% endblock %}
+
+{% block body %}
+<div class="section-header">
+    <h1>📊 Prix des produits</h1>
+    <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">← {{ 'admin.back'|trans }}</a>
+</div>
+
+{# ── Cactus ── #}
+<h2 style="color:var(--heading-color);font-size:1.1rem;margin:1.5rem 0 0.75rem;">🌵 {{ 'nav.cactus'|trans }}</h2>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>{{ 'common.id'|trans }}</th>
+            <th>{{ 'cactus.name'|trans }}</th>
+            <th>{{ 'cactus.category'|trans }}</th>
+            <th style="text-align:right;">{{ 'cactus.price'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for cactu in cacti %}
+        <tr>
+            <td style="color:var(--text-secondary);font-size:0.8rem;">{{ cactu.id }}</td>
+            <td><strong>{{ cactu.name }}</strong></td>
+            <td>{{ cactu.categorie ? cactu.categorie.name : '—' }}</td>
+            <td style="text-align:right;">{{ cactu.prix|number_format(2, ',', ' ') }} €</td>
+        </tr>
+    {% else %}
+        <tr class="empty-row"><td colspan="4">—</td></tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr style="background:var(--bg-tertiary);font-weight:700;">
+            <td colspan="3">{{ 'commande.total'|trans }}</td>
+            <td style="text-align:right;color:var(--link-color);">{{ totalCactus|number_format(2, ',', ' ') }} €</td>
+        </tr>
+    </tfoot>
+</table>
+
+{# ── Terreaux ── #}
+<h2 style="color:var(--heading-color);font-size:1.1rem;margin:2rem 0 0.75rem;">🌱 {{ 'nav.terreau'|trans }}</h2>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>{{ 'common.id'|trans }}</th>
+            <th>{{ 'terreau.name'|trans }}</th>
+            <th>{{ 'terreau.composition'|trans }}</th>
+            <th style="text-align:right;">{{ 'terreau.price'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for terreau in terreaux %}
+        <tr>
+            <td style="color:var(--text-secondary);font-size:0.8rem;">{{ terreau.id }}</td>
+            <td><strong>{{ terreau.name }}</strong></td>
+            <td>{{ terreau.composition }}</td>
+            <td style="text-align:right;">{{ terreau.prix|number_format(2, ',', ' ') }} €</td>
+        </tr>
+    {% else %}
+        <tr class="empty-row"><td colspan="4">—</td></tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr style="background:var(--bg-tertiary);font-weight:700;">
+            <td colspan="3">{{ 'commande.total'|trans }}</td>
+            <td style="text-align:right;color:var(--link-color);">{{ totalTerreau|number_format(2, ',', ' ') }} €</td>
+        </tr>
+    </tfoot>
+</table>
+
+{# ── Pots ── #}
+<h2 style="color:var(--heading-color);font-size:1.1rem;margin:2rem 0 0.75rem;">🪴 {{ 'nav.pot'|trans }}</h2>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>{{ 'common.id'|trans }}</th>
+            <th>{{ 'pot.name'|trans }}</th>
+            <th>{{ 'pot.material'|trans }}</th>
+            <th style="text-align:right;">{{ 'pot.price'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for pot in pots %}
+        <tr>
+            <td style="color:var(--text-secondary);font-size:0.8rem;">{{ pot.id }}</td>
+            <td><strong>{{ pot.name }}</strong></td>
+            <td>{{ pot.material }}</td>
+            <td style="text-align:right;">{{ pot.prix|number_format(2, ',', ' ') }} €</td>
+        </tr>
+    {% else %}
+        <tr class="empty-row"><td colspan="4">—</td></tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr style="background:var(--bg-tertiary);font-weight:700;">
+            <td colspan="3">{{ 'commande.total'|trans }}</td>
+            <td style="text-align:right;color:var(--link-color);">{{ totalPot|number_format(2, ',', ' ') }} €</td>
+        </tr>
+    </tfoot>
+</table>
+
+{# ── Grand total ── #}
+<div style="margin-top:2rem;padding:1.5rem;background:var(--bg-secondary);border-radius:14px;box-shadow:0 1px 3px var(--shadow-light);display:flex;justify-content:space-between;align-items:center;">
+    <span style="font-size:1.1rem;font-weight:700;color:var(--heading-color);">💰 {{ 'commande.total'|trans }} ({{ 'nav.cactus'|trans }} + {{ 'nav.terreau'|trans }} + {{ 'nav.pot'|trans }})</span>
+    <span style="font-size:1.5rem;font-weight:800;color:var(--link-color);">{{ grandTotal|number_format(2, ',', ' ') }} €</span>
+</div>
+{% endblock %}
