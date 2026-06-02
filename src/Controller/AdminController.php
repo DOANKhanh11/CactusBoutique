@@ -20,11 +20,21 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class AdminController extends AbstractController
 {
     #[Route('', name: 'admin_dashboard')]
-    public function dashboard(UserRepository $userRepository): Response
+    public function dashboard(
+        UserRepository $userRepository,
+        CactusRepository $cactusRepository,
+        TerreauRepository $terreauRepository,
+        PotRepository $potRepository
+    ): Response
     {
+        $totalData = count($cactusRepository->findAll()) + 
+                     count($terreauRepository->findAll()) + 
+                     count($potRepository->findAll());
+        
         return $this->render('admin/dashboard.html.twig', [
             'users' => $userRepository->findAll(),
             'total_users' => count($userRepository->findAll()),
+            'total_data' => $totalData,
         ]);
     }
 
